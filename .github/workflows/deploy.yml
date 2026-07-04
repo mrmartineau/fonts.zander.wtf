@@ -9,6 +9,16 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      skip_package_age:
+        description: "Bypass Aikido safe-chain minimum package age check"
+        type: boolean
+        default: false
+
+# Coalesce rapid pushes; a newer commit cancels an in-flight deploy of an older one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   Deploy-Production:
@@ -25,8 +35,9 @@ jobs:
           cache: "pnpm"
       - name: Install safe-chain
         run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh -s -- --ci
+      # inputs.skip_package_age is only set on manual dispatch; on push it's empty so the flag is omitted.
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile ${{ inputs.skip_package_age && '--safe-chain-skip-minimum-package-age' || '' }}
       - name: Build site
         run: pnpm build
       - name: Deploy to Cloudflare

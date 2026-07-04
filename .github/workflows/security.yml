@@ -3,6 +3,16 @@ name: Security
 on:
   push:
     branches: ["**"]
+  workflow_dispatch:
+    inputs:
+      skip_package_age:
+        description: "Bypass Aikido safe-chain minimum package age check"
+        type: boolean
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   safe-chain:
@@ -20,5 +30,6 @@ jobs:
           cache: "pnpm"
       - name: Install safe-chain
         run: curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh -s -- --ci
+      # inputs.skip_package_age is only set on manual dispatch; on push it's empty so the flag is omitted.
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile ${{ inputs.skip_package_age && '--safe-chain-skip-minimum-package-age' || '' }}
