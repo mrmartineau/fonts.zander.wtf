@@ -1,0 +1,284 @@
+---
+status: idea
+interest_level: "5"
+---
+
+> Rules: fonts must have a good selection of weights and/or be variable, unless they're display fonts, and ideally be free.
+
+> [!info] Legend
+> `[x]` = on [Google Fonts](https://fonts.google.com/) (ships as web font + OpenType). `[ ]` = not on Google Fonts, get it from the linked source. Tag = **Variable** (axes noted) or **Static**. OFL = SIL Open Font License 1.1.
+
+## Sans
+
+- [x] **[Geist](https://vercel.com/font)** — Variable (wght)
+  - Modern geometric Swiss-inspired sans built for developer & product UIs.
+  - Designer: Basement Studio · Foundry: Vercel · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Geist)
+- [x] **[Plus Jakarta Sans](https://tokotype.github.io/plusjakarta-sans/)** — Variable (wght)
+  - Fresh geometric sans originally made for Jakarta's "City of Collaboration" identity.
+  - Designer: Gumpita Rahayu · Foundry: Tokotype · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Plus+Jakarta+Sans)
+- [x] **[Bricolage Grotesque](https://ateliertriay.github.io/bricolage/)** — Variable (opsz, wdth, wght)
+  - Expressive variable grotesque blending French & British type traditions.
+  - Designer: Mathieu Triay · Foundry: Atelier Triay · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Bricolage+Grotesque)
+- [x] **[IBM Plex Sans](https://www.ibm.com/plex/)** — Variable (wdth, wght)
+  - IBM's corporate neo-grotesque balancing engineered precision with humanist warmth.
+  - Designer: Mike Abbink · Foundry: Bold Monday (for IBM) · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/IBM+Plex+Sans)
+- [x] **[Sen](https://github.com/philatype/Sen)** — Variable (wght)
+  - Clean geometric sans with a friendly, low-contrast character; good for UI text.
+  - Designer: Kosal Sen · Foundry: Philatype · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Sen)
+- [x] **[AR One Sans](https://github.com/niteeshy/ar-one-sans)** — Variable (ARRR, wght)
+  - Low-contrast, robustly spaced sans for high legibility in AR/VR UIs (retinal-resolution axis).
+  - Designer: Niteesh Yadav · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/AR+One+Sans)
+- [x] **[Onest](https://onest.md/en)** — Variable (wght)
+  - Hybrid geometric-humanist grotesque made for clear, honest, legible communication.
+  - Designer: Simpals Design · Foundry: Simpals · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Onest)
+- [x] **[DM Sans](https://www.colophon-foundry.org)** — Variable (opsz, wght)
+  - Low-contrast geometric sans intended for use at smaller text sizes.
+  - Designer: Colophon Foundry (Latin base from Poppins) · Foundry: Colophon Foundry · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/DM+Sans)
+- [ ] **[Google Sans](https://design.google/library/google-sans-flex-font)** — proprietary
+  - Google's geometric brand/product typeface; not publicly distributed.
+  - Designer: Google Creative Lab (optimised by Colophon) · Foundry: Google · Licence: Proprietary (all rights reserved)
+  - Open variable sibling: **[Google Sans Flex](https://fonts.google.com/specimen/Google+Sans+Flex)** — Variable (wght, wdth, opsz, slnt, ROND) · David Berlow / Font Bureau · OFL · on Google Fonts
+- [x] **[Inter](https://rsms.me/inter/)** — Variable (wght, opsz, slnt)
+  - Workhorse UI typeface with a tall x-height, legible from small text to signage.
+  - Designer: Rasmus Andersson · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Inter) · [Source](https://github.com/rsms/inter)
+- [x] **[Raleway](https://www.theleagueofmoveabletype.com/raleway)** — Variable (wght)
+  - Elegant geometric-humanist sans with thin-display roots and a distinctive "w".
+  - Designer: Matt McInerney, expanded by Pablo Impallari & Rodrigo Fuenzalida · Foundry: The League of Moveable Type · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Raleway)
+- [x] **[Outfit](https://fonts.google.com/specimen/Outfit)** — Variable (wght)
+  - Clean, even-width geometric sans for branding and UI; neutral, modern feel.
+  - Designer: Rodrigo Fuenzalida · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Outfit)
+- [x] **[Space Grotesk](https://fonts.floriankarsten.com/space-grotesk)** — Variable (wght)
+  - Proportional grotesque derived from Space Mono; quirky, techy display character.
+  - Designer: Florian Karsten · Foundry: Florian Karsten Typefaces · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Space+Grotesk)
+- [x] **[Schibsted Grotesk](https://github.com/schibsted/schibsted-grotesk)** — Variable (wght)
+  - Digital-first grotesque for UIs — functional and neutral with subtle warmth. _(listed as "Schisted Grotesk")_
+  - Designer: Bakken & Bæck · Foundry: Bakken & Bæck (for Schibsted) · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Schibsted+Grotesk)
+- [ ] **[Uncut Sans](https://uncut.wtf/sans-serif/uncut-sans/)** — Variable
+  - Neutral, versatile Helvetica-adjacent grotesque with a broad weight range.
+  - Designer: Kasper Nordkvist · Foundry: UNCUT.wtf · Licence: OFL
+  - Download: [uncut.wtf](https://uncut.wtf/sans-serif/uncut-sans/)
+- [ ] **[D-DIN](https://www.fontsquirrel.com/fonts/d-din)** — Static
+  - Geometric digital interpretation of the German DIN 1451 standard; technical / signage use.
+  - Designer: Charles Nix · Foundry: Monotype (for Datto) · Licence: OFL
+  - Download: [Font Squirrel](https://www.fontsquirrel.com/fonts/d-din)
+- [x] **[Epilogue](https://etceteratype.co/pages/epilogue)** — Variable (wght, ital)
+  - Geometric-grotesque with a wide weight range plus italics; text and display.
+  - Designer: Tyler Finck · Foundry: Etcetera Type Co · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Epilogue)
+- [x] **[Geologica](https://monokrom.no)** — Variable (wght, slnt, CRSV, SHRP)
+  - Humanist sans on geometric bones; rich variable axes tuned for readable text.
+  - Designer: Sindre Bremnes & Frode Helland · Foundry: Monokrom · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Geologica)
+- [x] **[Atkinson Hyperlegible](https://www.brailleinstitute.org/freefont/)** — Static
+  - Humanist sans engineered for low-vision readability (differentiated B/8, I/l/1, open counters).
+  - Designer: Applied Design Works · Foundry: Braille Institute of America · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Atkinson+Hyperlegible) · Variable version: [Atkinson Hyperlegible Next](https://fonts.google.com/specimen/Atkinson+Hyperlegible+Next)
+- [x] **[Mona Sans](https://github.com/mona-sans)** — Variable (wght, wdth)
+  - Strong, versatile grotesque inspired by industrial-era type; GitHub's brand sans.
+  - Designer: Deni Anggara · Foundry: Degarism Studio (for GitHub) · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Mona+Sans) · [Source](https://github.com/github/mona-sans)
+- [x] **[Hubot Sans](https://github.com/github/hubot-sans)** — Variable (wght, wdth)
+  - Geometric, slightly robotic sans — Mona Sans's technical sidekick for headers.
+  - Designer: Deni Anggara · Foundry: Degarism Studio (for GitHub) · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Hubot+Sans) · [Source](https://github.com/github/hubot-sans)
+- [x] **[Nunito](https://www.cyreal.org/)** — Variable (wght)
+  - Balanced humanist sans with distinctive rounded terminals; display and body.
+  - Designer: Vernon Adams, extended by Jacques Le Bailly · Foundry: Cyreal · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Nunito)
+
+## Serif
+
+- [x] **[Corben](https://fonts.google.com/specimen/Corben)** — Static
+  - Rounded, chunky bold slab-serif display face with a friendly retro character.
+  - Designer: Vernon Adams · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Corben)
+- [x] **[Arapey](http://www.tipo.net.ar)** — Static
+  - Elegant high-contrast Didone-flavoured serif for refined editorial text.
+  - Designer: Eduardo Tunni · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Arapey)
+- [x] **[Instrument Serif](https://github.com/Instrument/instrument-serif)** — Static
+  - Condensed, high-contrast display serif with a classical, elegant tone.
+  - Designer: Rodrigo Fuenzalida · Foundry: Instrument · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Instrument+Serif)
+- [x] **[DM Serif Display](https://fonts.google.com/specimen/DM+Serif+Display) / [Text](https://fonts.google.com/specimen/DM+Serif+Text)** — Static
+  - High-contrast transitional serif; Display for headlines, Text tuned for body.
+  - Designer: Colophon Foundry (for Google) · Foundry: Colophon Foundry · Licence: OFL
+  - Download: [Display](https://fonts.google.com/specimen/DM+Serif+Display) · [Text](https://fonts.google.com/specimen/DM+Serif+Text)
+- [x] **[Lora](https://www.cyreal.org/fonts/lora/)** — Variable (wght)
+  - Balanced contemporary serif with calligraphic roots; ideal for body text.
+  - Designer: Olga Karpushina & Alexei Vanyashin · Foundry: Cyreal · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Lora)
+- [x] **[Libre Baskerville](https://github.com/impallari/Libre-Baskerville)** — Variable (wght)
+  - Web-optimised Baskerville revival with tall x-height for on-screen body text.
+  - Designer: Pablo Impallari & Rodrigo Fuenzalida · Foundry: Impallari Type · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Libre+Baskerville)
+- [x] **[EB Garamond](http://www.georgduffner.at/ebgaramond/)** — Variable (wght)
+  - Open-source revival of Claude Garamont's 16th-century types; classical text serif.
+  - Designer: Georg Duffner (bold by Octavio Pardo) · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/EB+Garamond)
+- [x] **[Crimson Text](https://github.com/skosch/Crimson)** — Static
+  - Garamond-inspired oldstyle serif designed for book and long-form text.
+  - Designer: Sebastian Kosch · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Crimson+Text)
+- [x] **[Spectral](https://productiontype.com/font/spectral)** — Static
+  - Screen-first serif commissioned by Google for Docs/Slides; sturdy for reading.
+  - Designer: Production Type (dir. Jean-Baptiste Levée) · Foundry: Production Type · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Spectral)
+- [x] **[Cormorant](https://github.com/CatharsisFonts/Cormorant)** — Variable (wght)
+  - Garamond-inspired high-contrast display serif for large, high-res headlines.
+  - Designer: Christian Thalmann · Foundry: Catharsis Fonts · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Cormorant)
+- [x] **[Newsreader](https://productiontype.com/font/newsreader)** — Variable (opsz, wght)
+  - Open-source serif for extended on-screen reading in editorial contexts.
+  - Designer: Production Type (dir. Jean-Baptiste Levée) · Foundry: Production Type · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Newsreader)
+- [x] **[Unna](https://github.com/Omnibus-Type/Unna)** — Static
+  - Transitional/neoclassical serif with delicate serifs; designed for literature.
+  - Designer: Jorge de Buen · Foundry: Omnibus-Type · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Unna)
+- [x] **[Fraunces](https://fraunces.undercase.xyz/)** — Variable (opsz, wght, SOFT, WONK)
+  - Expressive "wonky" Old Style display serif with personality-driven axes.
+  - Designer: Phaedra Charles & Flavia Zimbardi · Foundry: Undercase Type · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Fraunces)
+- [x] **[Crimson Pro](https://github.com/Fonthausen/CrimsonPro)** — Variable (wght)
+  - Reworked variable-weight redesign of Crimson Text; refined oldstyle text serif.
+  - Designer: Jacques Le Bailly (after Sebastian Kosch) · Foundry: Fonthausen · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Crimson+Pro)
+- [x] **[Courier Prime](https://quoteunquoteapps.com/courierprime/)** — Static
+  - Monospace Courier redesign with true italics; optimised for screenplays.
+  - Designer: Alan Dague-Greene · Foundry: Quote-Unquote Apps · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Courier+Prime)
+- [x] **[Lustria](https://fonts.google.com/specimen/Lustria)** — Static
+  - Rounded-serif text typeface that also works at larger display sizes.
+  - Designer: Matthew Desmond · Foundry: MADType · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Lustria)
+- [ ] **[Alpha Lyrae](https://vegaprotocol.github.io/alpha-lyrae/)** — Static
+  - Helvetica-influenced grotesque (actually a _sans_, not serif) with edgy terminals and pixelated/glitch OpenType sets; built for Vega's trading brand.
+  - Designer: Fontfabric (for Vega Protocol) · Foundry: Fontfabric · Licence: OFL
+  - Download: [GitHub](https://github.com/vegaprotocol/alpha-lyrae)
+
+## Mono
+
+- [x] **[Geist Mono](https://vercel.com/font)** — Variable (wght, ital)
+  - Monospaced companion to Geist for code editors, terminals, technical UI.
+  - Designer: Vercel & Basement Studio · Foundry: Vercel · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Geist+Mono)
+- [x] **[DM Mono](https://fonts.google.com/specimen/DM+Mono)** — Static
+  - Three-weight monospace derived from DM Sans; low-contrast, lightly geometric.
+  - Designer: Colophon Foundry (for DeepMind) · Foundry: Colophon Foundry · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/DM+Mono)
+- [x] **[Space Mono](https://fonts.google.com/specimen/Space+Mono)** — Static
+  - Fixed-width display face with a geometric-slab core and retro-futurist flavour.
+  - Designer: Colophon Foundry · Foundry: Colophon Foundry · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Space+Mono)
+- [x] **[Google Sans Code](https://fonts.google.com/specimen/Google+Sans+Code)** — Variable (wght)
+  - Monospace built for writing and reading code; tuned for clarity at small sizes.
+  - Designer: Google & Universal Thirst · Foundry: Google / Universal Thirst · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Google+Sans+Code)
+
+## Pixel
+
+- [ ] **[Departure Mono](https://departuremono.com/)** — Static
+  - Lo-fi monospaced pixel/bitmap font evoking early command-line interfaces.
+  - Designer: Helena Zhang · Licence: OFL
+  - Download: [departuremono.com](https://departuremono.com/) · [Source](https://github.com/rektdeckard/departure-mono)
+- [ ] **[Geist Pixel](https://vercel.com/font)** — Static
+  - Pixel/bitmap display face extending the Geist family; five stylistic variants.
+  - Designer: Vercel · Foundry: Vercel · Licence: OFL
+  - Download: [GitHub](https://github.com/vercel/geist-pixel-font)
+- [ ] **[Analog Mono](https://gleeson.itch.io/analog-mono)** — Static
+  - Lo-fi monospace pixel face inspired by 1990s–2000s CRT TV & camcorder displays.
+  - Designer: gleeson · Licence: CC BY 4.0 (PLUS version under custom licence)
+  - Download: [itch.io](https://gleeson.itch.io/analog-mono)
+- [ ] **[Chicago Kare](https://chicagokare.xyz/)** — Static
+  - Faithful bitmap reproduction of Susan Kare's 1984 Mac "Chicago" UI typeface.
+  - Designer: Duane King (orig. Susan Kare, 1984) · Licence: MIT
+  - Download: [Source](https://github.com/KingDuane/Chicago-Kare)
+- [ ] **[Phosphene](https://uncut.wtf/display/phosphene/)** — display
+  - Experimental face blending pixel and script forms into a hybrid; named after phosphenes.
+  - Designer: Jeanne Saliou · Foundry: UNCUT.wtf · Licence: Free personal & commercial (UNCUT.wtf terms)
+  - Download: [uncut.wtf](https://uncut.wtf/display/phosphene/)
+
+## Display
+
+- [x] **[Bagel Fat One](https://fonts.google.com/specimen/Bagel+Fat+One)** — Static
+  - Plump, high-contrast rounded display face inspired by bread and pastries.
+  - Designer: Kyungwon Kim · Foundry: JAMO · Licence: OFL
+  - Download: [Google Fonts](https://fonts.google.com/specimen/Bagel+Fat+One)
+- [ ] **[Heal the Web](https://healtheweb.site/)** — Variable (Display + Body versions)
+  - Experimental geometric face evoking circuits and networks; commissioned by Mozilla.
+  - Designer: Rainbow Unicorn & Jakub Kanior · Foundry: Rainbow Unicorn · Licence: MPL-2.0
+  - Download: [healtheweb.site](https://healtheweb.site/)
+- [ ] **[Utara](https://github.com/LCTipografi/LCT-Utara)** — Static
+  - Geometric sans with clean modern lines and playful stylistic alternates.
+  - Designer: Deni Anggara · Foundry: LCTipografi · Licence: OFL
+  - Download: [GitHub](https://github.com/LCTipografi/LCT-Utara)
+- [ ] **[LC Mogi](https://github.com/LCTipografi/LCT-Mogi)** — Variable (width)
+  - Bold variable-width display face (condensed to expanded) for headlines and posters.
+  - Designer: Deni Anggara · Foundry: LCTipografi · Licence: OFL
+  - Download: [GitHub](https://github.com/LCTipografi/LCT-Mogi)
+- [ ] **[Roberte](https://typotheque.genderfluid.space/en/fontes/roberte)** — display
+  - Curveless italic-stroke face after Robert Granjon, with post-binary/inclusive glyphs.
+  - Designer: Eugénie Bidaut · Foundry: Bye Bye Binary · Licence: Open source (BBB terms)
+  - Download: [genderfluid.space](https://typotheque.genderfluid.space/en/fontes/roberte)
+- [ ] **[Cakra](https://oomtype.com/fonts/cakra.php)** — display
+  - Experimental display face with discretionary ligatures, emoji and stylistic sets.
+  - Designer: Lucía Kollert · Foundry: OoM Type · Licence: OFL
+  - Download: [Source](https://github.com/oom-type/cakra-typeface) · [uncut.wtf](https://uncut.wtf/display/cakra/)
+- [ ] **[GTL001](https://github.com/eliheuer/GTL001)** — display
+  - Alpha-release experimental display type; debut of the GTL Type Label.
+  - Designer: Eli Heuer · Foundry: GTL Type Label · Licence: OFL
+  - Download: [GitHub](https://github.com/eliheuer/GTL001)
+- [ ] **[Getai Grotesk Display](https://sylvestertan.com/GETAI-GROTESK)** — display
+  - Display grotesk fusing Latin forms with Chinese "getai" stage-lettering detail.
+  - Designer: Sylvester Tan · Foundry: Death of Typography · Licence: OFL
+  - Download: [uncut.wtf](https://uncut.wtf/display/getai-grotesk-display/)
+- [ ] **[PicNic](https://velvetyne.fr/fonts/picnic/)** — display
+  - Organic face with contextual/inclusive ligatures; inspired by a water drop on oilcloth.
+  - Designer: Mariel Nils · Foundry: Velvetyne · Licence: CUTE
+  - Download: [velvetyne.fr](https://velvetyne.fr/fonts/picnic/)
+- [ ] **[NulTien](https://uncut.wtf/display/nultien/)** — display (5 cuts)
+  - Architectural display type studying Rotterdam's structural forms.
+  - Designer: Constantine Belias · Foundry: UNCUT.wtf · Licence: Free personal & commercial (UNCUT.wtf terms)
+  - Download: [uncut.wtf](https://uncut.wtf/display/nultien/)
+- [ ] **[Stack Sans](https://github.com/DylanYoungKoto/Stack-Sans)** — display
+  - Modernist sans with distinctive notched detailing; made for Stack Overflow.
+  - Designer: Koto · Foundry: Koto · Licence: OFL
+  - Download: [GitHub](https://github.com/DylanYoungKoto/Stack-Sans)
+- [ ] **[Sinistre](https://www.collletttivo.it/typefaces/sinistre)** — display
+  - Titling face blending Uncial, Roman proportions and Fraktur hints with sharp terminals.
+  - Designer: Jules Durand (Cyrillic by Varya Goncharova) · Foundry: Collletttivo · Licence: OFL
+  - Download: [collletttivo.it](https://www.collletttivo.it/typefaces/sinistre)
+- [ ] **[Kobata](https://www.tunera.xyz/fonts/kobata/)** — display
+  - Geometric-but-functional experimental face nodding to calligraphy and embroidery.
+  - Designer: Ariel Martín Pérez · Foundry: Tunera Type Foundry · Licence: OFL
+  - Download: [tunera.xyz](https://www.tunera.xyz/fonts/kobata/)
+- [ ] **[Sharpie](https://www.fontshare.com/fonts/sharpie)** — Static (5 weights)
+  - Informal sign-painterly brush-script family from Light to Black.
+  - Designer: Théo Guillard · Foundry: Indian Type Foundry · Licence: ITF Free Font License
+  - Download: [Fontshare](https://www.fontshare.com/fonts/sharpie)
+
+## Resources
+
+- https://fontsinuse.com/
+- https://www.fontsquirrel.com/
+- https://fonts.google.com/
+- https://www.freefaces.gallery/
+- https://www.typedump.com
+
+## Foundries
+
+- https://www.fontshare.com/

@@ -1,0 +1,17 @@
+---
+name: "Schibsted Grotesk"
+category: "sans-serif"
+style: "Variable (wght)"
+variable: true
+axes:
+  - "wght"
+description: 'Digital-first grotesque for UIs — functional and neutral with subtle warmth. *(listed as "Schisted Grotesk")*'
+designer: "Bakken & Bæck"
+foundry: "Bakken & Bæck (for Schibsted)"
+licence: "OFL"
+website: "https://github.com/schibsted/schibsted-grotesk"
+googleFonts: "Schibsted Grotesk"
+links:
+  - label: "Google Fonts"
+    url: "https://fonts.google.com/specimen/Schibsted+Grotesk"
+---

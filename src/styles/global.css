@@ -1,0 +1,43 @@
+/* Site-level overrides — ZUI owns the reset/base layers.
+   Customise via tokens only; keep colours flat and neutral. */
+
+:root {
+  /* near-black / near-white neutral brand colour */
+  /* --color-background: light-dark(oklch(0% 0 0), oklch(100% 0.00011 271.152));
+  --color-theme: light-dark(oklch(0.28 0.015 260), oklch(0.92 0.005 260));
+  --color-accent: light-dark(oklch(0.55 0.03 260), oklch(0.75 0.02 260)); */
+
+  --color-theme: light-dark(var(--color-mist-600), var(--color-mist-400));
+  --color-accent: light-dark(var(--color-sky-600), var(--color-sky-400));
+  --color-background: light-dark(var(--color-mist-50), var(--color-mist-950));
+  --color-surface: light-dark(var(--color-mist-100), var(--color-mist-900));
+  --radius-scale: 1.25;
+}
+
+body {
+  background: var(--color-background);
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-background) 400px);
+  color: var(--color-text);
+}
+
+.site-container {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+/* Site wordmark face — available on every page */
+@font-face {
+  font-family: "Heal the Web Preview";
+  src: url("/fonts/heal-the-web/HealTheWebA-Regular.otf");
+  font-display: swap;
+}
+
+.site-footer {
+  padding-block: var(--space-lg) var(--space-xl);
+  border-block-start: 1px var(--border-style) var(--color-border);
+  margin-block-start: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}

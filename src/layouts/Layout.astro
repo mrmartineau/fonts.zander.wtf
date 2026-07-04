@@ -1,0 +1,54 @@
+---
+import "@mrmartineau/zui/css";
+import "@phosphor-icons/web/regular";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "A curated showcase of free, high-quality typefaces — sans-serif, serif, mono, pixel and display.",
+} = Astro.props;
+
+const pageTitle = title ? `${title} · Free Fonts` : "Free Fonts";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <footer class="site-container site-footer zui-color-muted zui-text--1">
+      <p>
+        Sourced from Google Fonts, uncut.wtf, Fontshare, Velvetyne and
+        independent foundries. All fonts are free to use — check each licence
+        for details.
+      </p>
+      <p>
+        Made by <a class="zui-link" href="https://zander.wtf">Zander Martineau</a> using <a class="zui-link" href="https://github.com/mrmartineau/zui">ZUI</a>. The "Free Fonts" logo is set in <a class="zui-link" href="/fonts/heal-the-web/">Heal the Web</a>.
+      </p>
+      <p>
+        Inspired by <a class="zui-link" href="https://www.typedump.com/">Typedump</a>,&nbsp;
+        <a class="zui-link" href="https://freefaces.gallery">Free Faces</a>,&nbsp;
+        <a class="zui-link" href="https://uncut.wtf">UNCUT.wtf</a> and&nbsp;
+        <a class="zui-link" href="https://www.fontbrief.com/fontbrief">Fontbrief</a>.
+      </p>
+    </footer>
+  </body>
+</html>

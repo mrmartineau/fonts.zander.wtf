@@ -1,0 +1,371 @@
+---
+import { getCollection } from "astro:content";
+import Badge from "@mrmartineau/zui/astro/Badge.astro";
+import Card from "@mrmartineau/zui/astro/Card.astro";
+import Layout from "../layouts/Layout.astro";
+
+const fonts = await getCollection("fonts");
+
+const categories = [
+  { id: "sans-serif", label: "Sans-serif" },
+  { id: "serif", label: "Serif" },
+  { id: "mono", label: "Mono" },
+  { id: "pixel", label: "Pixel" },
+  { id: "display", label: "Display" },
+] as const;
+
+const grouped = categories.map((category) => ({
+  ...category,
+  fonts: fonts
+    .filter((font) => font.data.category === category.id)
+    .sort((a, b) => a.data.name.localeCompare(b.data.name)),
+}));
+
+// Load every previewable font upfront: one combined Google Fonts request…
+const googleFamilies = fonts
+  .filter((font) => font.data.googleFonts)
+  .map((font) => font.data.googleFonts as string)
+  .sort();
+const googleFontsCss = `https://fonts.googleapis.com/css2?${googleFamilies
+  .map((family) => `family=${family.replaceAll(" ", "+")}`)
+  .join("&")}&display=swap`;
+
+// …plus @font-face rules for the self-hosted ones
+const localFontFaces = fonts
+  .filter((font) => !font.data.googleFonts && font.data.previewFont)
+  .map(
+    (font) =>
+      `@font-face { font-family: '${font.data.name} Preview'; src: url('${font.data.previewFont}'); font-display: swap; }`,
+  )
+  .join("\n");
+
+const previewFamily = (font: (typeof fonts)[number]) =>
+  font.data.googleFonts ??
+  (font.data.previewFont ? `${font.data.name} Preview` : undefined);
+---
+
+<Layout>
+  <Fragment slot="head">
+    <link rel="stylesheet" href={googleFontsCss} />
+    {localFontFaces && <style is:inline set:html={localFontFaces} />}
+  </Fragment>
+
+  <header class="site-container site-header">
+    <h1>Free Fonts</h1>
+    <p class="zui-color-muted zui-text-1">
+      A curated showcase of free, high-quality typefaces. Fonts must have a
+      good selection of weights and/or be variable — unless they're display
+      faces — and ideally be free.
+    </p>
+    <nav class="category-nav" aria-label="Font categories">
+      {
+        grouped.map((category) => (
+          <a class="zui-button zui-button-variant-subtle zui-button-size-sm zui-button-shape-soft" href={`#${category.id}`}>
+            {category.label}
+            <span class="zui-color-faint">{category.fonts.length}</span>
+          </a>
+        ))
+      }
+    </nav>
+    <div class="filter-row">
+      <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+      <input
+        type="search"
+        id="font-filter"
+        class="zui-input"
+        placeholder="Type anywhere to filter fonts…"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Filter fonts"
+      />
+    </div>
+  </header>
+
+  <main class="site-container flow">
+    {
+      grouped.map((category) => (
+        <section id={category.id} class="category-section">
+          <h2>{category.label}</h2>
+          <div class="font-list">
+            {category.fonts.map((font) => (
+              <Card
+                class="font-card"
+                data-filterable
+                data-search={`${font.data.name} ${font.data.designer} ${font.data.category}`.toLowerCase()}
+              >
+                <div class="font-card-meta">
+                  <a class="zui-link font-card-name" href={`/fonts/${font.id}/`}>
+                    {font.data.name}
+                  </a>
+                  <Badge color={font.data.variable ? "blue" : "gray"}>
+                    {font.data.variable ? "Variable" : "Static"}
+                  </Badge>
+                  <span class="zui-color-faint zui-text--1 font-card-designer">
+                    {font.data.designer}
+                  </span>
+                </div>
+                <p
+                  class="font-card-preview"
+                  contenteditable="plaintext-only"
+                  spellcheck="false"
+                  data-preview
+                  data-default={font.data.name}
+                  style={
+                    previewFamily(font) &&
+                    `font-family: '${previewFamily(font)}'`
+                  }
+                >
+                  {font.data.name}
+                </p>
+                <a class="zui-button zui-button-icon zui-button-variant-ghost zui-button-shape-soft font-card-link" href={`/fonts/${font.id}/`}>
+                  <i class="ph ph-arrow-right" aria-hidden="true" />
+                </a>
+              </Card>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+    <p id="no-results" class="zui-color-muted" hidden>
+      No fonts match — press <kbd class="zui-code">Esc</kbd> to clear.
+    </p>
+  </main>
+
+  <button
+    type="button"
+    id="reset-preview"
+    class="zui-button zui-button-icon zui-button-shape-soft"
+    aria-label="Reset preview text"
+    title="Reset preview text"
+    hidden
+  >
+    <i class="ph ph-x" aria-hidden="true"></i>
+  </button>
+</Layout>
+
+<style>
+  .site-header {
+    padding-block: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .site-header h1 {
+    font-size: clamp(2.5rem, 10vw, 6rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-family: "Heal the Web Preview", system-ui, sans-serif;
+  }
+
+  .site-header p {
+    max-width: 46ch;
+    text-wrap: pretty;
+    margin-inline: auto;
+  }
+
+  .category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-block-start: var(--space-2xs);
+    margin-inline: auto;
+  }
+
+  .filter-row {
+    position: relative;
+    max-width: 24rem;
+    margin-block-start: var(--space-2xs);
+    margin-inline: auto;
+  }
+
+  .filter-row i {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: var(--space-xs);
+    translate: 0 -50%;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .filter-row input {
+    width: 100%;
+    padding-inline-start: var(--space-xl);
+    border-radius: var(--radius-3xl);
+  }
+
+  #no-results {
+    padding-block: var(--space-xl);
+  }
+
+  .category-section {
+    padding-block: var(--space-lg);
+  }
+
+  .category-section h2 {
+    font-size: var(--step-2);
+    letter-spacing: -0.01em;
+    margin-block-end: var(--space-sm);
+  }
+
+  .font-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .font-list :global(.font-card) {
+    --zui-card-radius: var(--radius-3xl);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    border: none;
+  }
+
+  /* display:flex above beats the UA [hidden] rule — restore it for filtering */
+  .font-list :global(.font-card[hidden]) {
+    display: none;
+  }
+
+  .font-card {
+    position: relative;
+  }
+
+  .font-card-link {
+    position: absolute;
+    inset-block-end: var(--space-sm);
+    inset-inline-end: var(--space-sm);
+  }
+
+  .font-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .font-card-name {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
+  }
+
+  .font-card-designer {
+    margin-inline-start: auto;
+  }
+
+  .font-card-preview {
+    font-size: clamp(2.75rem, 12vw, 7rem);
+    line-height: 1.1;
+    text-align: center;
+    overflow-wrap: break-word;
+    outline: none;
+    cursor: text;
+    padding-block: var(--space-md);
+  }
+
+  .font-card-preview:focus-visible {
+    outline: 2px dashed var(--color-border);
+    outline-offset: var(--space-3xs);
+    border-radius: var(--radius-sm);
+  }
+
+  #reset-preview {
+    position: fixed;
+    inset-block-end: var(--space-md);
+    inset-inline-end: var(--space-md);
+    z-index: var(--z-5);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* zui-button's display:inline-flex beats the UA [hidden] rule */
+  #reset-preview[hidden] {
+    display: none;
+  }
+</style>
+
+<script>
+  const filter = document.getElementById("font-filter");
+  const cards = [...document.querySelectorAll<HTMLElement>("[data-filterable]")];
+  const sections = [...document.querySelectorAll<HTMLElement>(".category-section")];
+  const noResults = document.getElementById("no-results");
+  const previews = [...document.querySelectorAll<HTMLElement>("[data-preview]")];
+  const resetButton = document.getElementById("reset-preview");
+
+  // Every space-separated query token must appear as a contiguous substring
+  const tokenMatch = (query: string, haystack: string) =>
+    query.split(/\s+/).every((token) => haystack.includes(token));
+
+  const applyFilter = () => {
+    if (!(filter instanceof HTMLInputElement)) return;
+    const query = filter.value.trim().toLowerCase();
+    let anyVisible = false;
+    for (const card of cards) {
+      const match =
+        query === "" || tokenMatch(query, card.dataset.search ?? "");
+      card.hidden = !match;
+      if (match) anyVisible = true;
+    }
+    for (const section of sections) {
+      section.hidden = !section.querySelector("[data-filterable]:not([hidden])");
+    }
+    if (noResults) noResults.hidden = anyVisible;
+  };
+
+  filter?.addEventListener("input", applyFilter);
+
+  // Shared preview text: editing one card overrides all of them
+  for (const preview of previews) {
+    preview.addEventListener("input", () => {
+      const text = preview.textContent ?? "";
+      for (const other of previews) {
+        if (other !== preview) other.textContent = text;
+      }
+      // Only offer reset while something actually differs from its default
+      const overridden = previews.some(
+        (p) => p.textContent !== (p.dataset.default ?? ""),
+      );
+      if (resetButton) resetButton.hidden = !overridden;
+    });
+  }
+
+  const resetPreviews = () => {
+    for (const preview of previews) {
+      preview.textContent = preview.dataset.default ?? "";
+    }
+    if (resetButton) resetButton.hidden = true;
+  };
+
+  resetButton?.addEventListener("click", resetPreviews);
+
+  // Type anywhere on the page to start filtering
+  document.addEventListener("keydown", (event) => {
+    if (!(filter instanceof HTMLInputElement)) return;
+    const target = event.target as HTMLElement;
+    const typingElsewhere =
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target.isContentEditable;
+
+    if (event.key === "Escape") {
+      if (target.isContentEditable) {
+        resetPreviews();
+        target.blur();
+        return;
+      }
+      filter.value = "";
+      applyFilter();
+      filter.blur();
+      return;
+    }
+    if (typingElsewhere || event.metaKey || event.ctrlKey || event.altKey) {
+      return;
+    }
+    if (event.key.length === 1 || event.key === "Backspace") {
+      filter.focus();
+    }
+  });
+</script>

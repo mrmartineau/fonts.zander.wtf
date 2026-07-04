@@ -1,0 +1,469 @@
+---
+import { getCollection, render } from "astro:content";
+import Badge from "@mrmartineau/zui/astro/Badge.astro";
+import Button from "@mrmartineau/zui/astro/Button.astro";
+import Card from "@mrmartineau/zui/astro/Card.astro";
+import CardBody from "@mrmartineau/zui/astro/CardBody.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const fonts = await getCollection("fonts");
+  // Prev/next within the same category, matching homepage order
+  return fonts.map((font) => {
+    const siblings = fonts
+      .filter((other) => other.data.category === font.data.category)
+      .sort((a, b) => a.data.name.localeCompare(b.data.name));
+    const index = siblings.findIndex((other) => other.id === font.id);
+    const toLink = (entry?: (typeof fonts)[number]) =>
+      entry ? { id: entry.id, name: entry.data.name } : undefined;
+    return {
+      params: { slug: font.id },
+      props: {
+        font,
+        prev: toLink(siblings[index - 1]),
+        next: toLink(siblings[index + 1]),
+      },
+    };
+  });
+}
+
+const { font, prev, next } = Astro.props;
+const data = font.data;
+const { Content } = await render(font);
+const hasNotes = Boolean(font.body?.trim());
+
+const googleFontsCss = data.googleFonts
+  ? `https://fonts.googleapis.com/css2?family=${data.googleFonts.replaceAll(" ", "+")}&display=swap`
+  : undefined;
+
+// Self-hosted fonts (not on Google Fonts) load via a local @font-face
+const localFamily = !data.googleFonts && data.previewFont
+  ? `${data.name} Preview`
+  : undefined;
+const previewFamily = data.googleFonts ?? localFamily;
+const fontFaceCss = localFamily
+  ? `@font-face { font-family: '${localFamily}'; src: url('${data.previewFont}'); font-display: swap; }`
+  : undefined;
+
+const pangram = "The quick brown fox jumps over the lazy dog";
+const sizes = ["step-4", "step-3", "step-2", "step-1", "step-0"];
+---
+
+<Layout title={data.name} description={data.description}>
+  <Fragment slot="head">
+    {googleFontsCss && <link rel="stylesheet" href={googleFontsCss} />}
+    {data.previewFont && (
+      <link
+        rel="preload"
+        href={data.previewFont}
+        as="font"
+        crossorigin="anonymous"
+      />
+    )}
+    {fontFaceCss && <style is:inline set:html={fontFaceCss} />}
+  </Fragment>
+
+  <main
+    class="site-container flow font-page"
+    style={previewFamily && `--specimen-font: '${previewFamily}'`}
+  >
+    <nav class="back-nav">
+      <a class="zui-button zui-button-variant-ghost zui-button-size-sm" href="/">
+        <i class="ph ph-arrow-left"></i>
+        All fonts
+      </a>
+    </nav>
+
+    {
+      previewFamily && (
+        <section class="preview-hero" aria-label="Editable preview">
+          <label class="sr-only" for="specimen-input">
+            Try {data.name} with your own text
+          </label>
+          <textarea
+            id="specimen-input"
+            class="specimen-input"
+            rows="1"
+            spellcheck="false"
+            autocomplete="off"
+            placeholder={pangram}
+          >{data.name}</textarea>
+          <div class="specimen-controls">
+            <p class="zui-color-faint zui-text--1 specimen-hint">
+              <i class="ph ph-cursor-text" /> Click above and type to preview
+              your own text
+            </p>
+            <div class="size-control">
+              <label class="zui-color-faint zui-text--1" for="specimen-size">
+                <i class="ph ph-text-aa" /> Size
+              </label>
+              <input
+                type="range"
+                id="specimen-size"
+                min="16"
+                max="240"
+                step="1"
+                value="120"
+              />
+              <output
+                class="zui-color-faint zui-text--1"
+                for="specimen-size"
+                id="specimen-size-value">120px</output>
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <header class="font-header">
+      <div class="flex flex-wrap gap-2xs">
+        <Badge variant="outline">{data.category}</Badge>
+        <Badge color={data.variable ? "blue" : "gray"}>{data.style}</Badge>
+        <Badge>{data.licence}</Badge>
+      </div>
+      <h1>{data.name}</h1>
+      <p class="zui-color-muted zui-text-1 font-description">
+        {data.description}
+      </p>
+      <div class="flex flex-wrap gap-xs action-row">
+        <Button href={data.website} rel="noopener">
+          <i class="ph ph-globe"></i>
+          Website
+        </Button>
+        {
+          data.links.map((link) => (
+            <Button variant="outline" href={link.url} rel="noopener">
+              <i class="ph ph-download-simple" />
+              {link.label}
+            </Button>
+          ))
+        }
+      </div>
+    </header>
+
+    {
+      previewFamily ? (
+        <section class="specimen flow" aria-label="Type specimen">
+          <h2>Waterfall</h2>
+          <div class="waterfall">
+            {sizes.map((size) => (
+              <p class="specimen-text" style={`font-size: var(--${size})`}>
+                {pangram}
+              </p>
+            ))}
+          </div>
+
+          <h2>Character set</h2>
+          <div class="charset specimen-text">
+            <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+            <p>abcdefghijklmnopqrstuvwxyz</p>
+            <p>0123456789</p>
+            <p>{`!@#$%&*()[]{}<>,.;:'"?/—–-+=`}</p>
+          </div>
+
+          <h2>Paragraph</h2>
+          <p class="specimen-text specimen-paragraph">
+            Typography is the craft of endowing human language with a durable
+            visual form. It shapes how words are read, felt and remembered —
+            from wayfinding on a station platform to the small print of a
+            contract. Good type disappears into reading; great type gives a
+            voice to the text.
+          </p>
+        </section>
+      ) : (
+        <Card>
+          <CardBody>
+            <p>
+              <i class="ph ph-info" /> No live preview available for this
+              font. Use the links above to get it and try it locally.
+            </p>
+          </CardBody>
+        </Card>
+      )
+    }
+
+    <section class="details">
+      <h2>Details</h2>
+      <dl class="details-grid">
+        <dt>Designer</dt>
+        <dd>{data.designer}</dd>
+        {
+          data.foundry && (
+            <>
+              <dt>Foundry</dt>
+              <dd>{data.foundry}</dd>
+            </>
+          )
+        }
+        <dt>Licence</dt>
+        <dd>{data.licence}</dd>
+        <dt>Format</dt>
+        <dd>{data.style}</dd>
+        {
+          data.axes.length > 0 && (
+            <>
+              <dt>Variable axes</dt>
+              <dd>{data.axes.join(", ")}</dd>
+            </>
+          )
+        }
+      </dl>
+      {
+        hasNotes && (
+          <div class="prose notes">
+            <Content />
+          </div>
+        )
+      }
+    </section>
+
+    {
+      (prev || next) && (
+        <nav class="sibling-nav" aria-label={`More ${data.category} fonts`}>
+          {prev ? (
+            <a class="zui-button zui-button-variant-outline" href={`/fonts/${prev.id}/`}>
+              <i class="ph ph-arrow-left" aria-hidden="true" />
+              {prev.name}
+            </a>
+          ) : (
+            <span />
+          )}
+          <a
+            class="zui-button zui-button-variant-ghost zui-button-size-sm"
+            href={`/#${data.category}`}
+          >
+            All {data.category}
+          </a>
+          {next ? (
+            <a class="zui-button zui-button-variant-outline" href={`/fonts/${next.id}/`}>
+              {next.name}
+              <i class="ph ph-arrow-right" aria-hidden="true" />
+            </a>
+          ) : (
+            <span />
+          )}
+        </nav>
+      )
+    }
+  </main>
+
+  <button
+    type="button"
+    id="reset-specimen"
+    class="zui-button zui-button-icon zui-button-shape-soft"
+    aria-label="Reset preview text"
+    title="Reset preview text"
+    hidden
+  >
+    <i class="ph ph-x" aria-hidden="true"></i>
+  </button>
+</Layout>
+
+<style>
+  .font-page {
+    padding-block: var(--space-md) var(--space-2xl);
+  }
+
+  .font-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-block: var(--space-md) var(--space-lg);
+    border-block-end: 1px var(--border-style) var(--color-border);
+  }
+
+  .font-header h1 {
+    font-size: var(--step-5);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .font-description {
+    max-width: 55ch;
+    text-wrap: pretty;
+  }
+
+  .action-row {
+    margin-block-start: var(--space-xs);
+  }
+
+  .specimen h2,
+  .details h2 {
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.5;
+    margin-block: var(--space-lg) var(--space-xs);
+  }
+
+  .specimen-text {
+    font-family: var(--specimen-font), sans-serif;
+    line-height: 1.25;
+    overflow-wrap: break-word;
+  }
+
+  .preview-hero {
+    padding-block: var(--space-xl);
+    border-block-end: 1px var(--border-style) var(--color-border);
+  }
+
+  /* Invisible textarea — reads as editable display text, not a form control */
+  .specimen-input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    resize: none;
+    overflow: hidden;
+    color: inherit;
+    font-family: var(--specimen-font), sans-serif;
+    font-size: var(--preview-size, var(--step-6));
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-align: center;
+    field-sizing: content;
+  }
+
+  .specimen-input:focus-visible {
+    outline: 2px dashed var(--color-border);
+    outline-offset: var(--space-2xs);
+    border-radius: var(--radius-sm);
+  }
+
+  .specimen-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs) var(--space-lg);
+    margin-block-start: var(--space-md);
+  }
+
+  .size-control {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+  }
+
+  .size-control input[type="range"] {
+    width: clamp(8rem, 20vw, 14rem);
+    accent-color: var(--color-theme);
+  }
+
+  .size-control output {
+    min-inline-size: 4ch;
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .waterfall {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .charset p {
+    font-size: var(--step-2);
+    line-height: 1.4;
+  }
+
+  .specimen-paragraph {
+    font-size: var(--step-1);
+    line-height: 1.5;
+    max-width: 60ch;
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--space-2xs) var(--space-md);
+  }
+
+  .details-grid dt {
+    color: var(--color-text);
+    opacity: 0.55;
+  }
+
+  .notes {
+    margin-block-start: var(--space-md);
+  }
+
+  .sibling-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+    margin-block-start: var(--space-xl);
+    padding-block-start: var(--space-lg);
+    border-block-start: 1px var(--border-style) var(--color-border);
+  }
+
+  #reset-specimen {
+    position: fixed;
+    inset-block-end: var(--space-md);
+    inset-inline-end: var(--space-md);
+    z-index: var(--z-5);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* zui-button's display:inline-flex beats the UA [hidden] rule */
+  #reset-specimen[hidden] {
+    display: none;
+  }
+</style>
+
+<script>
+  const input = document.getElementById("specimen-input");
+  const slider = document.getElementById("specimen-size");
+  const readout = document.getElementById("specimen-size-value");
+  const resetButton = document.getElementById("reset-specimen");
+
+  // Autogrow fallback for browsers without CSS field-sizing support
+  const grow = () => {
+    if (
+      input instanceof HTMLTextAreaElement &&
+      !CSS.supports("field-sizing", "content")
+    ) {
+      input.style.height = "auto";
+      input.style.height = `${input.scrollHeight}px`;
+    }
+  };
+  input?.addEventListener("input", grow);
+  grow();
+
+  if (slider instanceof HTMLInputElement && input && readout) {
+    const applySize = () => {
+      input.style.setProperty("--preview-size", `${slider.value}px`);
+      readout.textContent = `${slider.value}px`;
+      grow();
+    };
+    slider.addEventListener("input", applySize);
+    applySize();
+  }
+
+  // Reset button appears only while the preview text is overridden
+  const resetSpecimen = () => {
+    if (!(input instanceof HTMLTextAreaElement)) return;
+    input.value = input.defaultValue;
+    grow();
+    if (resetButton) resetButton.hidden = true;
+  };
+
+  input?.addEventListener("input", () => {
+    if (!(input instanceof HTMLTextAreaElement) || !resetButton) return;
+    resetButton.hidden = input.value === input.defaultValue;
+  });
+
+  resetButton?.addEventListener("click", resetSpecimen);
+
+  // Escape anywhere resets the preview text
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !(input instanceof HTMLTextAreaElement)) {
+      return;
+    }
+    resetSpecimen();
+    input.blur();
+  });
+</script>

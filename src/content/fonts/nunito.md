@@ -1,0 +1,17 @@
+---
+name: "Nunito"
+category: "sans-serif"
+style: "Variable (wght)"
+variable: true
+axes:
+  - "wght"
+description: "Balanced humanist sans with distinctive rounded terminals; display and body."
+designer: "Vernon Adams, extended by Jacques Le Bailly"
+foundry: "Cyreal"
+licence: "OFL"
+website: "https://www.cyreal.org/"
+googleFonts: "Nunito"
+links:
+  - label: "Google Fonts"
+    url: "https://fonts.google.com/specimen/Nunito"
+---
