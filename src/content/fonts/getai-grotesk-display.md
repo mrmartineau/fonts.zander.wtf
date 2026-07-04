@@ -7,7 +7,7 @@ description: 'Display grotesk fusing Latin forms with Chinese "getai" stage-lett
 designer: "Sylvester Tan"
 foundry: "Death of Typography"
 licence: "OFL"
-previewFont: "/fonts/getai-grotesk-display/DTGetaiGroteskDisplay-Black.otf"
+previewFont: "/fonts/getai-grotesk-display/GetaiGroteskDisplay-Black.woff2"
 website: "https://sylvestertan.com/GETAI-GROTESK"
 links:
   - label: "uncut.wtf"
