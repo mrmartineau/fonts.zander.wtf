@@ -93,17 +93,6 @@ const previewFamily = (font: (typeof fonts)[number]) =>
                 data-filterable
                 data-search={`${font.data.name} ${font.data.designer} ${font.data.category}`.toLowerCase()}
               >
-                <div class="font-card-meta">
-                  <a class="zui-link font-card-name" href={`/fonts/${font.id}/`}>
-                    {font.data.name}
-                  </a>
-                  <Badge color={font.data.variable ? "blue" : "gray"}>
-                    {font.data.variable ? "Variable" : "Static"}
-                  </Badge>
-                  <span class="zui-color-faint zui-text--1 font-card-designer">
-                    {font.data.designer}
-                  </span>
-                </div>
                 <p
                   class="font-card-preview"
                   contenteditable="plaintext-only"
@@ -117,9 +106,22 @@ const previewFamily = (font: (typeof fonts)[number]) =>
                 >
                   {font.data.name}
                 </p>
-                <a class="zui-button zui-button-icon zui-button-variant-ghost zui-button-shape-soft font-card-link" href={`/fonts/${font.id}/`}>
-                  <i class="ph ph-arrow-right" aria-hidden="true" />
-                </a>
+                <div class="font-card-meta">
+                  <div>
+                    <a class="zui-link font-card-name" href={`/fonts/${font.id}/`}>
+                      {font.data.name}
+                    </a>
+                    &nbsp;by <span class="zui-color-faint zui-text--1 font-card-designer">
+                      {font.data.designer}
+                    </span>
+                  </div>
+                  <Badge color={font.data.variable ? "blue" : "gray"}>
+                    {font.data.variable ? "Variable" : "Static"}
+                  </Badge>
+                  <a class="zui-button zui-button-icon zui-button-variant-ghost zui-button-shape-soft" href={`/fonts/${font.id}/`}>
+                    <i class="ph ph-arrow-right" aria-hidden="true" />
+                  </a>
+                </div>
               </Card>
             ))}
           </div>
@@ -233,16 +235,11 @@ const previewFamily = (font: (typeof fonts)[number]) =>
     position: relative;
   }
 
-  .font-card-link {
-    position: absolute;
-    inset-block-end: var(--space-sm);
-    inset-inline-end: var(--space-sm);
-  }
-
   .font-card-meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: var(--space-xs);
   }
 
@@ -253,9 +250,9 @@ const previewFamily = (font: (typeof fonts)[number]) =>
     gap: var(--space-3xs);
   }
 
-  .font-card-designer {
+  /* .font-card-designer {
     margin-inline-start: auto;
-  }
+  } */
 
   .font-card-preview {
     font-size: clamp(2.75rem, 12vw, 7rem);
