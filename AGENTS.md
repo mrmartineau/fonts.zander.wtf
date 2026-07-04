@@ -1,25 +1,58 @@
-## Development
+# fonts.zander.wtf — Free Fonts
 
-When starting the dev server, use background mode:
+A curated showcase of free, high-quality typefaces at https://fonts.zander.wtf. Static Astro site styled with ZUI, deployed to Cloudflare Workers via GitHub Actions.
 
+## Stack
+
+- **Astro 7** — fully static output (no adapter, no SSR)
+- **ZUI** (`@mrmartineau/zui`) — CSS-first UI library, Astro component wrappers
+- **Vite+** (`vp`) — formatting, linting, type checking
+- **pnpm** — package manager
+- **Cloudflare Workers** — static assets deploy, config in `wrangler.jsonc`
+
+## Commands
+
+```sh
+pnpm dev        # dev server (portless run astro dev)
+pnpm build      # astro build → dist/
+vp check        # format + lint + type check (--fix to auto-fix)
+pnpm deploy     # build + wrangler deploy (needs Cloudflare auth)
 ```
-astro dev --background
-```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+CI: `.github/workflows/deploy.yml` deploys on push to `main` (needs `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` repo secrets); `security.yml` runs the Aikido safe-chain scan on every branch.
+
+## Architecture
+
+- `src/content/fonts/*.md` — one file per typeface (62 fonts). Schema in `src/content.config.ts`:
+  - `category`: `sans-serif | serif | mono | pixel | display`
+  - `googleFonts`: family name when hosted on Google Fonts (drives live previews)
+  - `previewFont`: path to a self-hosted file in `public/fonts/<slug>/` for fonts NOT on Google Fonts
+  - plus `name`, `style`, `variable`, `axes`, `description`, `designer`, `foundry`, `licence`, `website`, `links`
+- `src/pages/index.astro` — homepage: full-width cards per category, each showing the font name rendered in the font itself; contenteditable shared preview text (edit one card → all update); fuzzy filter (type anywhere); floating reset X.
+- `src/pages/fonts/[slug].astro` — detail page: editable centred preview hero with size slider, waterfall/character-set/paragraph specimen, details list, prev/next within category.
+- `src/layouts/Layout.astro` — head, shared footer.
+- `src/styles/global.css` — token overrides only (neutral theme, `--radius-scale`); ZUI owns reset/base layers.
+- `public/fonts/<slug>/` — self-hosted font files for the ~20 fonts not on Google Fonts.
+- `Free Fonts showcase.md` — original source document the content collection was generated from. Content files are now hand-maintained; edit them directly, not the source doc.
+
+## Font preview loading
+
+- Homepage loads ALL preview fonts upfront: one combined Google Fonts `css2` request (40 families, regular 400 only) + inline `@font-face` rules for self-hosted files.
+- Detail pages load only their own font. Self-hosted fonts get the family name `"<Name> Preview"`.
+- Google Sans (proprietary) and Analog Mono (itch.io checkout only) have no preview.
+
+## Gotchas
+
+- **ZUI barrel import is broken** in the published package (`src/core/` not shipped; Menu/Tabs reference it). Always deep-import: `import Card from "@mrmartineau/zui/astro/Card.astro"` — never `from "@mrmartineau/zui/astro"`.
+- **`hidden` attribute vs ZUI display rules**: ZUI components set `display` (e.g. `.zui-button { display: inline-flex }`), which beats the UA `[hidden]` rule. Any element you toggle with `hidden` needs an explicit `[hidden] { display: none }` override. This has bitten three times (font cards, both reset buttons).
+- **Styling**: override ZUI CSS custom properties/tokens (`--zui-card-radius`, `--color-theme`, …), don't hard-code values or fight the cascade.
+- `vp check --fix` reformats aggressively (including markdown) — run it before committing.
 
 ## Documentation
 
-Full documentation: https://docs.astro.build
-
-Consult these guides before working on related tasks:
-
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+- Astro: https://docs.astro.build (routing, content collections, components)
+- ZUI usage: the `using-zui` skill / ZUI docs
+- Vite+: `node_modules/vite-plus/docs` or https://viteplus.dev/guide/
 
 <!--VITE PLUS START-->
 
