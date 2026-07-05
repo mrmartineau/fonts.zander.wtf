@@ -44,7 +44,7 @@ const previewFamily = (font: (typeof fonts)[number]) =>
   (font.data.previewFont ? `${font.data.name} Preview` : undefined);
 ---
 
-<Layout>
+<Layout description="A curated showcase of free, high-quality typefaces by Zander Martineau">
   <Fragment slot="head">
     <link rel="stylesheet" href={googleFontsCss} />
     {localFontFaces && <style is:inline set:html={localFontFaces} />}
@@ -53,9 +53,9 @@ const previewFamily = (font: (typeof fonts)[number]) =>
   <header class="site-container site-header">
     <h1>Free Fonts</h1>
     <p class="zui-color-muted zui-text-1">
-      A curated showcase of free, high-quality typefaces. Fonts must have a
-      good selection of weights and/or be variable — unless they're display
-      faces — and ideally be free.
+      A curated showcase of free, high-quality typefaces. Each font offers a
+      good selection of weights and/or is variable — unless it's a display
+      face.
     </p>
     <nav class="category-nav" aria-label="Font categories">
       {
@@ -70,10 +70,10 @@ const previewFamily = (font: (typeof fonts)[number]) =>
     <div class="filter-row">
       <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
       <input
-        type="search"
+        type="text"
         id="font-filter"
         class="zui-input"
-        placeholder="Type anywhere to filter fonts…"
+        placeholder="Filter fonts…"
         autocomplete="off"
         spellcheck="false"
         aria-label="Filter fonts"
@@ -155,7 +155,7 @@ const previewFamily = (font: (typeof fonts)[number]) =>
   }
 
   .site-header h1 {
-    font-size: clamp(2.5rem, 10vw, 6rem);
+    font-size: clamp(2.5rem, 14vw, 7rem);
     line-height: 1.05;
     letter-spacing: -0.02em;
     font-family: "Heal the Web Preview", system-ui, sans-serif;
@@ -176,8 +176,9 @@ const previewFamily = (font: (typeof fonts)[number]) =>
   }
 
   .filter-row {
-    position: relative;
-    max-width: 24rem;
+    position: sticky;
+    top: 0;
+    max-width: 30rem;
     margin-block-start: var(--space-2xs);
     margin-inline: auto;
   }
@@ -193,7 +194,8 @@ const previewFamily = (font: (typeof fonts)[number]) =>
 
   .filter-row input {
     width: 100%;
-    padding-inline-start: var(--space-xl);
+    padding-inline-start: var(--space-lg);
+    padding-inline-end: var(--space-xs);
     border-radius: var(--radius-3xl);
   }
 
@@ -249,10 +251,6 @@ const previewFamily = (font: (typeof fonts)[number]) =>
     align-items: center;
     gap: var(--space-3xs);
   }
-
-  /* .font-card-designer {
-    margin-inline-start: auto;
-  } */
 
   .font-card-preview {
     font-size: clamp(2.75rem, 12vw, 7rem);
