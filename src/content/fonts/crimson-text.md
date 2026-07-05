@@ -11,4 +11,6 @@ googleFonts: "Crimson Text"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Crimson+Text"
+weights: [400, 600, 700]
+googleFontsSpec: "Crimson Text:wght@400;600;700"
 ---

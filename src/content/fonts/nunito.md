@@ -14,4 +14,7 @@ googleFonts: "Nunito"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Nunito"
+weights: [200, 300, 400, 500, 600, 700, 800, 900, 1000]
+axesRanges: [{ tag: "wght", min: 200, max: 1000, default: 400 }]
+googleFontsSpec: "Nunito:wght@200..1000"
 ---

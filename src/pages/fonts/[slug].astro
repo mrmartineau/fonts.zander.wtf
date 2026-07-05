@@ -32,21 +32,73 @@ const data = font.data;
 const { Content } = await render(font);
 const hasNotes = Boolean(font.body?.trim());
 
-const googleFontsCss = data.googleFonts
-  ? `https://fonts.googleapis.com/css2?family=${data.googleFonts.replaceAll(" ", "+")}&display=swap`
+// Detail pages request the full spec (all weights/axes); the homepage's
+// combined request stays regular-400-only. A previewFont set alongside
+// googleFonts takes over here: Google's pipeline strips most OpenType
+// features, so feature-rich fonts point at an unstripped file instead.
+const googleFontsParam = data.previewFont
+  ? undefined
+  : (data.googleFontsSpec ?? data.googleFonts);
+const googleFontsCss = googleFontsParam
+  ? `https://fonts.googleapis.com/css2?family=${googleFontsParam.replaceAll(" ", "+")}&display=swap`
   : undefined;
 
-// Self-hosted fonts (not on Google Fonts) load via a local @font-face
-const localFamily = !data.googleFonts && data.previewFont
-  ? `${data.name} Preview`
-  : undefined;
-const previewFamily = data.googleFonts ?? localFamily;
+// Self-hosted/external font files load via a local @font-face
+const localFamily = data.previewFont ? `${data.name} Preview` : undefined;
+// googleFonts may carry a css2 axis spec after a colon — strip it for the CSS family name
+const previewFamily = localFamily ?? data.googleFonts?.split(":")[0];
 const fontFaceCss = localFamily
   ? `@font-face { font-family: '${localFamily}'; src: url('${data.previewFont}'); font-display: swap; }`
   : undefined;
 
 const pangram = "The quick brown fox jumps over the lazy dog";
 const sizes = ["step-8", "step-7", "step-6", "step-5", "step-4", "step-3"];
+
+// Floating control dock: a slider per variable axis, static weight picker,
+// OpenType feature toggles
+const axisLabels: Record<string, { label: string; icon: string; unit?: string }> = {
+  wght: { label: "Weight", icon: "ph-text-b" },
+  wdth: { label: "Width", icon: "ph-arrows-out-line-horizontal" },
+  slnt: { label: "Slant", icon: "ph-text-italic", unit: "°" },
+  opsz: { label: "Optical size", icon: "ph-magnifying-glass" },
+  ital: { label: "Italic", icon: "ph-text-italic" },
+  GRAD: { label: "Grade", icon: "ph-gradient" },
+  ROND: { label: "Roundness", icon: "ph-circle" },
+  SOFT: { label: "Softness", icon: "ph-drop" },
+  WONK: { label: "Wonk", icon: "ph-smiley-wink" },
+  CRSV: { label: "Cursive", icon: "ph-pencil-line" },
+  SHRP: { label: "Sharpness", icon: "ph-star-four" },
+  MONO: { label: "Mono", icon: "ph-code" },
+};
+// Present the registered axes in a familiar order, customs after
+const axisOrder = ["wght", "wdth", "slnt", "opsz", "ital"];
+const orderKey = (tag: string) => {
+  const index = axisOrder.indexOf(tag);
+  return index === -1 ? axisOrder.length : index;
+};
+// Self-hosted variable fonts have no metadata-derived ranges — fall back to
+// the registered wght range; the browser clamps to what the font supports
+const dockAxes = data.variable
+  ? (data.axesRanges.length
+      ? data.axesRanges
+      : [{ tag: "wght", min: 100, max: 900, default: 400 }]
+    )
+      .slice()
+      .sort((a, b) => orderKey(a.tag) - orderKey(b.tag))
+      .map((axis) => ({
+        ...axis,
+        label: axisLabels[axis.tag]?.label ?? axis.tag,
+        icon: axisLabels[axis.tag]?.icon ?? "ph-sliders-horizontal",
+        unit: axisLabels[axis.tag]?.unit ?? "",
+      }))
+  : [];
+const weightChoices =
+  !data.variable && data.weights.length > 1 ? data.weights : [];
+const initialWeight = weightChoices.includes(400) ? 400 : weightChoices[0];
+const hasDock = Boolean(
+  previewFamily &&
+    (dockAxes.length > 0 || weightChoices.length > 0 || data.features.length > 0),
+);
 ---
 
 <Layout title={data.name} description={data.description}>
@@ -64,7 +116,7 @@ const sizes = ["step-8", "step-7", "step-6", "step-5", "step-4", "step-3"];
   </Fragment>
 
   <main
-    class="site-container flow font-page"
+    class:list={["site-container flow font-page", { "has-dock": hasDock }]}
     style={previewFamily && `--specimen-font: '${previewFamily}'`}
   >
     <nav class="back-nav">
@@ -247,6 +299,72 @@ const sizes = ["step-8", "step-7", "step-6", "step-5", "step-4", "step-3"];
     }
   </main>
 
+  {
+    hasDock && (
+      <div class="control-dock" id="control-dock">
+        {dockAxes.map((axis) => (
+          <div class="dock-control">
+            <label class="zui-color-faint zui-text--1" for={`axis-${axis.tag}`}>
+              <i class={`ph ${axis.icon}`} aria-hidden="true" /> {axis.label}
+            </label>
+            <input
+              type="range"
+              id={`axis-${axis.tag}`}
+              data-axis={axis.tag}
+              data-unit={axis.unit}
+              min={axis.min}
+              max={axis.max}
+              step="1"
+              value={axis.default}
+            />
+            <output
+              class="zui-color-faint zui-text--1"
+              for={`axis-${axis.tag}`}
+              data-axis-output={axis.tag}
+            >
+              {axis.default}{axis.unit}
+            </output>
+          </div>
+        ))}
+        {weightChoices.length > 0 && (
+          <div class="dock-control" role="group" aria-label="Weight">
+            <span class="zui-color-faint zui-text--1">
+              <i class="ph ph-text-b" aria-hidden="true" /> Weight
+            </span>
+            {weightChoices.map((weight) => (
+              <button
+                type="button"
+                class="zui-button zui-button-variant-subtle zui-button-size-sm zui-button-shape-soft"
+                data-weight={weight}
+                aria-pressed={weight === initialWeight ? "true" : "false"}
+              >
+                {weight}
+              </button>
+            ))}
+          </div>
+        )}
+        {data.features.length > 0 && (
+          <div class="dock-control" role="group" aria-label="OpenType features">
+            <span class="zui-color-faint zui-text--1">
+              <i class="ph ph-sliders-horizontal" aria-hidden="true" /> Features
+            </span>
+            {data.features.map((feature) => (
+              <button
+                type="button"
+                class="zui-button zui-button-variant-subtle zui-button-size-sm zui-button-shape-soft"
+                data-feature={feature.tag}
+                aria-pressed="false"
+                title={feature.tag}
+              >
+                {feature.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
   <button
     type="button"
     id="reset-specimen"
@@ -301,6 +419,19 @@ const sizes = ["step-8", "step-7", "step-6", "step-5", "step-4", "step-3"];
     font-family: var(--specimen-font), sans-serif;
     line-height: 1.25;
     overflow-wrap: break-word;
+  }
+
+  /* Dock controls drive these inherited custom properties */
+  .specimen-text,
+  .specimen-input {
+    font-weight: var(--specimen-weight, 400);
+    font-variation-settings: var(--specimen-variations, normal);
+    font-feature-settings: var(--specimen-features, normal);
+  }
+
+  /* Keep the dock clear of the page content */
+  .font-page.has-dock {
+    padding-block-end: calc(var(--space-2xl) + 9rem);
   }
 
   .preview-hero {
@@ -400,6 +531,49 @@ const sizes = ["step-8", "step-7", "step-6", "step-5", "step-4", "step-3"];
     border-block-start: 1px var(--border-style) var(--color-border);
   }
 
+  /* Same treatment as the homepage .wayfinder */
+  .control-dock {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs) var(--space-lg);
+    position: fixed;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(200px, 80%, 700px);
+    z-index: var(--z-2);
+    background-color: oklch(from var(--color-background) l c h / 50%);
+    backdrop-filter: blur(10px);
+    padding: var(--space-md);
+    border-radius: var(--radius-3xl);
+  }
+
+  .dock-control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+  }
+
+  .dock-control input[type="range"] {
+    width: clamp(8rem, 18vw, 12rem);
+    accent-color: var(--color-theme);
+  }
+
+  .dock-control output {
+    min-inline-size: 4ch;
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .control-dock .zui-button[aria-pressed="true"] {
+    background-color: var(--color-text);
+    color: var(--color-background);
+  }
+
   #reset-specimen {
     position: fixed;
     inset-block-end: var(--space-md);
@@ -466,4 +640,82 @@ const sizes = ["step-8", "step-7", "step-6", "step-5", "step-4", "step-3"];
     resetSpecimen();
     input.blur();
   });
+
+  // Control dock: axis sliders, static weight picker, feature toggles.
+  // Values land as custom properties on the page and are consumed by
+  // .specimen-text/.specimen-input (font-variation-settings & co inherit).
+  const page = document.querySelector(".font-page");
+  const dock = document.getElementById("control-dock");
+
+  if (dock && page instanceof HTMLElement) {
+    // Keep the fixed reset button clear of the dock
+    if (resetButton) {
+      resetButton.style.insetBlockEnd = `${dock.offsetHeight + 40}px`;
+    }
+
+    const variations = new Map<string, string>();
+    const applyVariations = () => {
+      page.style.setProperty(
+        "--specimen-variations",
+        variations.size
+          ? [...variations]
+              .map(([tag, value]) => `'${tag}' ${value}`)
+              .join(", ")
+          : "normal",
+      );
+    };
+
+    for (const slider of dock.querySelectorAll<HTMLInputElement>(
+      "input[data-axis]",
+    )) {
+      const tag = slider.dataset.axis ?? "";
+      const output = dock.querySelector(`[data-axis-output="${tag}"]`);
+      slider.addEventListener("input", () => {
+        variations.set(tag, slider.value);
+        if (output) {
+          output.textContent = `${slider.value}${slider.dataset.unit ?? ""}`;
+        }
+        applyVariations();
+      });
+    }
+
+    const weightButtons = [
+      ...dock.querySelectorAll<HTMLButtonElement>("button[data-weight]"),
+    ];
+    for (const button of weightButtons) {
+      button.addEventListener("click", () => {
+        page.style.setProperty(
+          "--specimen-weight",
+          button.dataset.weight ?? "400",
+        );
+        for (const other of weightButtons) {
+          other.setAttribute("aria-pressed", String(other === button));
+        }
+      });
+    }
+
+    const featureButtons = [
+      ...dock.querySelectorAll<HTMLButtonElement>("button[data-feature]"),
+    ];
+    const applyFeatures = () => {
+      const active = featureButtons.filter(
+        (button) => button.getAttribute("aria-pressed") === "true",
+      );
+      page.style.setProperty(
+        "--specimen-features",
+        active.length
+          ? active.map((button) => `"${button.dataset.feature}" 1`).join(", ")
+          : "normal",
+      );
+    };
+    for (const button of featureButtons) {
+      button.addEventListener("click", () => {
+        button.setAttribute(
+          "aria-pressed",
+          String(button.getAttribute("aria-pressed") !== "true"),
+        );
+        applyFeatures();
+      });
+    }
+  }
 </script>

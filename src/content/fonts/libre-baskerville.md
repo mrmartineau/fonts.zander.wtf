@@ -14,4 +14,7 @@ googleFonts: "Libre Baskerville"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Libre+Baskerville"
+weights: [400, 500, 600, 700]
+axesRanges: [{ tag: "wght", min: 400, max: 700, default: 400 }]
+googleFontsSpec: "Libre Baskerville:wght@400..700"
 ---

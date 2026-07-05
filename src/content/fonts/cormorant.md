@@ -14,4 +14,7 @@ googleFonts: "Cormorant"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Cormorant"
+weights: [300, 400, 500, 600, 700]
+axesRanges: [{ tag: "wght", min: 300, max: 700, default: 400 }]
+googleFontsSpec: "Cormorant:wght@300..700"
 ---

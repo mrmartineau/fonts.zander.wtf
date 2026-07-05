@@ -11,4 +11,5 @@ googleFonts: "Arapey"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Arapey"
+weights: [400]
 ---

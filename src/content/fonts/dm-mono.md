@@ -12,4 +12,6 @@ googleFonts: "DM Mono"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/DM+Mono"
+weights: [300, 400, 500]
+googleFontsSpec: "DM Mono:wght@300;400;500"
 ---

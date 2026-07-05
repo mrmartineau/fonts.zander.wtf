@@ -14,4 +14,6 @@ links:
     url: "https://fonts.google.com/specimen/Atkinson+Hyperlegible"
   - label: "Atkinson Hyperlegible Next"
     url: "https://fonts.google.com/specimen/Atkinson+Hyperlegible+Next"
+weights: [400, 700]
+googleFontsSpec: "Atkinson Hyperlegible:wght@400;700"
 ---

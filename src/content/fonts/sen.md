@@ -14,4 +14,7 @@ googleFonts: "Sen"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Sen"
+weights: [400, 500, 600, 700, 800]
+axesRanges: [{ tag: "wght", min: 400, max: 800, default: 400 }]
+googleFontsSpec: "Sen:wght@400..800"
 ---

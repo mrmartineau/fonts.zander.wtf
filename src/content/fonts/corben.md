@@ -11,4 +11,6 @@ googleFonts: "Corben"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Corben"
+weights: [400, 700]
+googleFontsSpec: "Corben:wght@400;700"
 ---

@@ -25,11 +25,13 @@ CI: `.github/workflows/deploy.yml` deploys on push to `main` (needs `CLOUDFLARE_
 
 - `src/content/fonts/*.md` — one file per typeface (62 fonts). Schema in `src/content.config.ts`:
   - `category`: `sans-serif | serif | mono | pixel | display`
-  - `googleFonts`: family name when hosted on Google Fonts (drives live previews)
-  - `previewFont`: path to a self-hosted file in `public/fonts/<slug>/` for fonts NOT on Google Fonts
+  - `googleFonts`: family name when hosted on Google Fonts (drives live previews). May carry a css2 axis spec after a colon (e.g. `UnifrakturCook:wght@700`) for families with no regular 400 — the URL uses the full value, the CSS family name strips from the colon.
+  - `previewFont`: path/URL to a font file — for fonts NOT on Google Fonts, or set ALONGSIDE `googleFonts` to make the detail page load an unstripped build instead (Google's pipeline strips most OpenType features — see Gotchas); the homepage still uses the light Google 400 either way
+  - `googleFontsSpec`: full css2 spec (all weights/axes ranges) used by detail pages only; `weights` + `axesRanges` (with min/max/default) drive the detail-page control dock. All three are generated from the Google Fonts metadata API (`https://fonts.google.com/metadata/fonts/<family>`) — regenerate rather than hand-edit when adding fonts.
+  - `features`: OpenType features (`{ tag, label }`) exposed as toggles on the detail page — hand-curated per font
   - plus `name`, `style`, `variable`, `axes`, `description`, `designer`, `foundry`, `licence`, `website`, `links`
 - `src/pages/index.astro` — homepage: full-width cards per category, each showing the font name rendered in the font itself; contenteditable shared preview text (edit one card → all update); fuzzy filter (type anywhere); floating reset X.
-- `src/pages/fonts/[slug].astro` — detail page: editable centred preview hero with size slider, waterfall/character-set/paragraph specimen, details list, prev/next within category.
+- `src/pages/fonts/[slug].astro` — detail page: editable centred preview hero with size slider, waterfall/character-set/paragraph specimen, details list, prev/next within category. Floating control dock (same styling as the homepage `.wayfinder`): weight/slant sliders for variable fonts (via `font-variation-settings`), weight picker for static multi-weight fonts, OpenType feature toggles (via `font-feature-settings`) — all applied as custom properties on `.font-page`, consumed by `.specimen-text`/`.specimen-input`.
 - `src/layouts/Layout.astro` — head, shared footer.
 - `src/styles/global.css` — token overrides only (neutral theme, `--radius-scale`); ZUI owns reset/base layers.
 - `public/fonts/<slug>/` — self-hosted font files for the ~20 fonts not on Google Fonts.
@@ -45,6 +47,7 @@ CI: `.github/workflows/deploy.yml` deploys on push to `main` (needs `CLOUDFLARE_
 
 - **ZUI barrel import is broken** in the published package (`src/core/` not shipped; Menu/Tabs reference it). Always deep-import: `import Card from "@mrmartineau/zui/astro/Card.astro"` — never `from "@mrmartineau/zui/astro"`.
 - **`hidden` attribute vs ZUI display rules**: ZUI components set `display` (e.g. `.zui-button { display: inline-flex }`), which beats the UA `[hidden]` rule. Any element you toggle with `hidden` needs an explicit `[hidden] { display: none }` override. This has bitten three times (font cards, both reset buttons).
+- **Google Fonts strips OpenType features**: served woff2s keep only a tiny allowlist (e.g. Inter arrives with just `pnum`/`tnum`; `zero`, `ss01`, `dlig`, `frac`, `case` are gone). Feature toggles only work against an unstripped file — set `previewFont` alongside `googleFonts` (Inter uses rsms.me's InterVariable; UnifrakturMaguntia self-hosts the upstream ttf converted to woff2). Verify what a file actually contains with fontTools before adding `features` to a font.
 - **Styling**: override ZUI CSS custom properties/tokens (`--zui-card-radius`, `--color-theme`, …), don't hard-code values or fight the cascade.
 - `vp check --fix` reformats aggressively (including markdown) — run it before committing.
 

@@ -12,4 +12,5 @@ googleFonts: "Lustria"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Lustria"
+weights: [400]
 ---

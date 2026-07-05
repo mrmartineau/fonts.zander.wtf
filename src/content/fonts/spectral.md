@@ -12,4 +12,6 @@ googleFonts: "Spectral"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Spectral"
+weights: [200, 300, 400, 500, 600, 700, 800]
+googleFontsSpec: "Spectral:wght@200;300;400;500;600;700;800"
 ---

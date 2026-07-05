@@ -12,4 +12,6 @@ googleFonts: "Unna"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Unna"
+weights: [400, 700]
+googleFontsSpec: "Unna:wght@400;700"
 ---

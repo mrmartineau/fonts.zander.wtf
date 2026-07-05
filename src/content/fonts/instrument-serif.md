@@ -12,4 +12,5 @@ googleFonts: "Instrument Serif"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Instrument+Serif"
+weights: [400]
 ---

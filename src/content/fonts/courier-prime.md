@@ -12,4 +12,6 @@ googleFonts: "Courier Prime"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Courier+Prime"
+weights: [400, 700]
+googleFontsSpec: "Courier Prime:wght@400;700"
 ---

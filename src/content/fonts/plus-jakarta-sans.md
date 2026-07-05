@@ -14,4 +14,7 @@ googleFonts: "Plus Jakarta Sans"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Plus+Jakarta+Sans"
+weights: [200, 300, 400, 500, 600, 700, 800]
+axesRanges: [{ tag: "wght", min: 200, max: 800, default: 400 }]
+googleFontsSpec: "Plus Jakarta Sans:wght@200..800"
 ---

@@ -39,8 +39,10 @@ const localFontFaces = fonts
   )
   .join("\n");
 
+// googleFonts may carry a css2 axis spec after a colon (e.g. "UnifrakturCook:wght@700");
+// only the part before the colon is the CSS font-family name
 const previewFamily = (font: (typeof fonts)[number]) =>
-  font.data.googleFonts ??
+  font.data.googleFonts?.split(":")[0] ??
   (font.data.previewFont ? `${font.data.name} Preview` : undefined);
 ---
 
@@ -57,16 +59,9 @@ const previewFamily = (font: (typeof fonts)[number]) =>
       good selection of weights and/or is variable — unless it's a display
       face.
     </p>
-    <nav class="category-nav" aria-label="Font categories">
-      {
-        grouped.map((category) => (
-          <a class="zui-button zui-button-variant-subtle zui-button-size-sm zui-button-shape-soft" href={`#${category.id}`}>
-            {category.label}
-            <span class="zui-color-faint">{category.fonts.length}</span>
-          </a>
-        ))
-      }
-    </nav>
+  </header>
+
+  <div class="wayfinder">
     <div class="filter-row">
       <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
       <input
@@ -79,7 +74,17 @@ const previewFamily = (font: (typeof fonts)[number]) =>
         aria-label="Filter fonts"
       />
     </div>
-  </header>
+    <nav class="category-nav" aria-label="Font categories">
+      {
+        grouped.map((category) => (
+          <a class="zui-button zui-button-variant-subtle zui-button-size-sm zui-button-shape-soft" href={`#${category.id}`}>
+            {category.label}
+            <span class="zui-color-faint">{category.fonts.length}</span>
+          </a>
+        ))
+      }
+    </nav>
+  </div>
 
   <main class="site-container flow">
     {
@@ -167,20 +172,34 @@ const previewFamily = (font: (typeof fonts)[number]) =>
     margin-inline: auto;
   }
 
+  .wayfinder {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    position: fixed;
+    bottom: var(--space-lg);
+    width: clamp(200px, 80%, 700px);
+    z-index: var(--z-2);
+    background-color: oklch(from var(--color-background) l c h / 70%);
+    backdrop-filter: blur(10px);
+    padding: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: var(--radius-3xl);
+  }
   .category-nav {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2xs);
     margin-block-start: var(--space-2xs);
-    margin-inline: auto;
+
+    a {
+      flex-grow: 1;
+    }
   }
 
   .filter-row {
-    position: sticky;
-    top: 0;
-    max-width: 30rem;
-    margin-block-start: var(--space-2xs);
-    margin-inline: auto;
+    position: relative;
   }
 
   .filter-row i {
@@ -197,6 +216,7 @@ const previewFamily = (font: (typeof fonts)[number]) =>
     padding-inline-start: var(--space-lg);
     padding-inline-end: var(--space-xs);
     border-radius: var(--radius-3xl);
+    --zui-input-bg: transparent;
   }
 
   #no-results {

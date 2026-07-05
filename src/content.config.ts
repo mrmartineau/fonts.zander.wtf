@@ -15,6 +15,22 @@ const fonts = defineCollection({
     licence: z.string(),
     website: z.string().url(),
     googleFonts: z.string().optional(),
+    // Full css2 spec (all weights/axes) — used by detail pages only, so the
+    // homepage's combined request stays regular-400-only
+    googleFontsSpec: z.string().optional(),
+    weights: z.array(z.number()).default([]),
+    axesRanges: z
+      .array(
+        z.object({
+          tag: z.string(),
+          min: z.number(),
+          max: z.number(),
+          default: z.number(),
+        }),
+      )
+      .default([]),
+    // OpenType features the detail page exposes as on/off toggles
+    features: z.array(z.object({ tag: z.string(), label: z.string() })).default([]),
     previewFont: z.string().optional(),
     links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
   }),

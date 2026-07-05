@@ -14,4 +14,5 @@ links:
     url: "https://fonts.google.com/specimen/DM+Serif+Display"
   - label: "Text"
     url: "https://fonts.google.com/specimen/DM+Serif+Text"
+weights: [400]
 ---

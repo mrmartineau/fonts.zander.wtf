@@ -12,4 +12,5 @@ googleFonts: "Bagel Fat One"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Bagel+Fat+One"
+weights: [400]
 ---
