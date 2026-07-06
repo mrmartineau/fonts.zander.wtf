@@ -10,6 +10,7 @@ designer: "Georg Duffner (bold by Octavio Pardo)"
 licence: "OFL"
 website: "http://www.georgduffner.at/ebgaramond/"
 googleFonts: "EB Garamond"
+fontsource: "@fontsource-variable/eb-garamond"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/EB+Garamond"

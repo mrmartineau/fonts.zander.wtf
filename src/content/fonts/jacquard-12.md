@@ -8,6 +8,7 @@ designer: "Sarah Cadigan-Fried"
 licence: "OFL"
 website: "https://github.com/scfried/soft-type-jacquard"
 googleFonts: "Jacquard 12"
+fontsource: "@fontsource/jacquard-12"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Jacquard+12"

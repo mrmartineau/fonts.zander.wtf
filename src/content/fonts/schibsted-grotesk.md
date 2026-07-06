@@ -11,6 +11,7 @@ foundry: "Bakken & Bæck (for Schibsted)"
 licence: "OFL"
 website: "https://github.com/schibsted/schibsted-grotesk"
 googleFonts: "Schibsted Grotesk"
+fontsource: "@fontsource-variable/schibsted-grotesk"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Schibsted+Grotesk"

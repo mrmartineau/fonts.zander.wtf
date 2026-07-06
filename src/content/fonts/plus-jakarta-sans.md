@@ -11,6 +11,7 @@ foundry: "Tokotype"
 licence: "OFL"
 website: "https://tokotype.github.io/plusjakarta-sans/"
 googleFonts: "Plus Jakarta Sans"
+fontsource: "@fontsource-variable/plus-jakarta-sans"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Plus+Jakarta+Sans"

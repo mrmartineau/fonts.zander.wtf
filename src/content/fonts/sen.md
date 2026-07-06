@@ -11,6 +11,7 @@ foundry: "Philatype"
 licence: "OFL"
 website: "https://github.com/philatype/Sen"
 googleFonts: "Sen"
+fontsource: "@fontsource-variable/sen"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Sen"

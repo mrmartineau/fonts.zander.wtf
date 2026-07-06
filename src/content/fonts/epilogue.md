@@ -12,6 +12,7 @@ foundry: "Etcetera Type Co"
 licence: "OFL"
 website: "https://etceteratype.co/pages/epilogue"
 googleFonts: "Epilogue"
+fontsource: "@fontsource-variable/epilogue"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Epilogue"

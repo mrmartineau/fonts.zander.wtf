@@ -9,6 +9,7 @@ foundry: "Omnibus-Type"
 licence: "OFL"
 website: "https://github.com/Omnibus-Type/Unna"
 googleFonts: "Unna"
+fontsource: "@fontsource/unna"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Unna"

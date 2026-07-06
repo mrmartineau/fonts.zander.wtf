@@ -12,6 +12,7 @@ foundry: "Mozilla"
 licence: "OFL"
 website: "https://github.com/mozilla/mozilla-headline-type"
 googleFonts: "Mozilla Headline"
+fontsource: "@fontsource-variable/mozilla-headline"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Mozilla+Headline"

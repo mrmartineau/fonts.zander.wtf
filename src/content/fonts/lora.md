@@ -11,6 +11,7 @@ foundry: "Cyreal"
 licence: "OFL"
 website: "https://www.cyreal.org/fonts/lora/"
 googleFonts: "Lora"
+fontsource: "@fontsource-variable/lora"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Lora"

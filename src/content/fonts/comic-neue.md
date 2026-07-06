@@ -8,6 +8,7 @@ designer: "Craig Rozynski & Hrant Papazian"
 licence: "OFL"
 website: "https://comicneue.com/"
 googleFonts: "Comic Neue"
+fontsource: "@fontsource/comic-neue"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Comic+Neue"

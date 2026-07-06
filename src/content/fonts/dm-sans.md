@@ -12,6 +12,7 @@ foundry: "Colophon Foundry"
 licence: "OFL"
 website: "https://www.colophon-foundry.org"
 googleFonts: "DM Sans"
+fontsource: "@fontsource-variable/dm-sans"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/DM+Sans"

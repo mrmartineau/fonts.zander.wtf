@@ -9,6 +9,7 @@ foundry: "Braille Institute of America"
 licence: "OFL"
 website: "https://www.brailleinstitute.org/freefont/"
 googleFonts: "Atkinson Hyperlegible"
+fontsource: "@fontsource/atkinson-hyperlegible"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Atkinson+Hyperlegible"

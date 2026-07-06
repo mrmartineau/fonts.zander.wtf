@@ -11,6 +11,7 @@ foundry: "Impallari Type"
 licence: "OFL"
 website: "https://github.com/impallari/Libre-Baskerville"
 googleFonts: "Libre Baskerville"
+fontsource: "@fontsource-variable/libre-baskerville"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Libre+Baskerville"

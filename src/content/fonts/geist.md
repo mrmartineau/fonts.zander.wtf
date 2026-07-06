@@ -11,6 +11,7 @@ foundry: "Vercel"
 licence: "OFL"
 website: "https://vercel.com/font"
 googleFonts: "Geist"
+fontsource: "@fontsource-variable/geist"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Geist"

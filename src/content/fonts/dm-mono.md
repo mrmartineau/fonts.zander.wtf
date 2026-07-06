@@ -9,6 +9,7 @@ foundry: "Colophon Foundry"
 licence: "OFL"
 website: "https://fonts.google.com/specimen/DM+Mono"
 googleFonts: "DM Mono"
+fontsource: "@fontsource/dm-mono"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/DM+Mono"

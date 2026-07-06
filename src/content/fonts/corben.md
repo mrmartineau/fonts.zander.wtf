@@ -8,6 +8,7 @@ designer: "Vernon Adams"
 licence: "OFL"
 website: "https://fonts.google.com/specimen/Corben"
 googleFonts: "Corben"
+fontsource: "@fontsource/corben"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Corben"

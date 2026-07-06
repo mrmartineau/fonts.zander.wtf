@@ -9,6 +9,7 @@ foundry: "UniFraktur project"
 licence: "OFL"
 website: "https://unifraktur.sourceforge.net/maguntia.html"
 googleFonts: "UnifrakturMaguntia"
+fontsource: "@fontsource/unifrakturmaguntia"
 # Google's pipeline strips hlig — detail page loads the full upstream build
 previewFont: "/fonts/unifraktur-maguntia/UnifrakturMaguntia.woff2"
 links:

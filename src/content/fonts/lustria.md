@@ -9,6 +9,7 @@ foundry: "MADType"
 licence: "OFL"
 website: "https://fonts.google.com/specimen/Lustria"
 googleFonts: "Lustria"
+fontsource: "@fontsource/lustria"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Lustria"

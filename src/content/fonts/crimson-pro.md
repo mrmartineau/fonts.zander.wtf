@@ -11,6 +11,7 @@ foundry: "Fonthausen"
 licence: "OFL"
 website: "https://github.com/Fonthausen/CrimsonPro"
 googleFonts: "Crimson Pro"
+fontsource: "@fontsource-variable/crimson-pro"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Crimson+Pro"

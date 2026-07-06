@@ -12,6 +12,7 @@ foundry: "Degarism Studio (for GitHub)"
 licence: "OFL"
 website: "https://github.com/mona-sans"
 googleFonts: "Mona Sans"
+fontsource: "@fontsource-variable/mona-sans"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Mona+Sans"

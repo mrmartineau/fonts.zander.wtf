@@ -11,6 +11,7 @@ foundry: "Simpals"
 licence: "OFL"
 website: "https://onest.md/en"
 googleFonts: "Onest"
+fontsource: "@fontsource-variable/onest"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Onest"

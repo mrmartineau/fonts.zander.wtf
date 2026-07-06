@@ -13,6 +13,7 @@ foundry: "Atelier Triay"
 licence: "OFL"
 website: "https://ateliertriay.github.io/bricolage/"
 googleFonts: "Bricolage Grotesque"
+fontsource: "@fontsource-variable/bricolage-grotesque"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Bricolage+Grotesque"

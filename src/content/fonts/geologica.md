@@ -14,6 +14,7 @@ foundry: "Monokrom"
 licence: "OFL"
 website: "https://monokrom.no"
 googleFonts: "Geologica"
+fontsource: "@fontsource-variable/geologica"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Geologica"

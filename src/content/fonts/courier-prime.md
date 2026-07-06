@@ -9,6 +9,7 @@ foundry: "Quote-Unquote Apps"
 licence: "OFL"
 website: "https://quoteunquoteapps.com/courierprime/"
 googleFonts: "Courier Prime"
+fontsource: "@fontsource/courier-prime"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Courier+Prime"

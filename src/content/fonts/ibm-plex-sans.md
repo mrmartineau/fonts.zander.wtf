@@ -12,6 +12,7 @@ foundry: "Bold Monday (for IBM)"
 licence: "OFL"
 website: "https://www.ibm.com/plex/"
 googleFonts: "IBM Plex Sans"
+fontsource: "@fontsource-variable/ibm-plex-sans"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/IBM+Plex+Sans"

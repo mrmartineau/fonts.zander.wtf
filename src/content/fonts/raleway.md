@@ -11,6 +11,7 @@ foundry: "The League of Moveable Type"
 licence: "OFL"
 website: "https://www.theleagueofmoveabletype.com/raleway"
 googleFonts: "Raleway"
+fontsource: "@fontsource-variable/raleway"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Raleway"

@@ -8,6 +8,7 @@ designer: "Eduardo Tunni"
 licence: "OFL"
 website: "http://www.tipo.net.ar"
 googleFonts: "Arapey"
+fontsource: "@fontsource/arapey"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Arapey"

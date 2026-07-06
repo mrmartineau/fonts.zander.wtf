@@ -9,6 +9,7 @@ foundry: "Colophon Foundry"
 licence: "OFL"
 website: "https://fonts.google.com/specimen/DM+Serif+Display"
 googleFonts: "DM Serif Display"
+fontsource: "@fontsource/dm-serif-display"
 links:
   - label: "Display"
     url: "https://fonts.google.com/specimen/DM+Serif+Display"

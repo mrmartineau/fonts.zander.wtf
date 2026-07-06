@@ -1,0 +1,70 @@
+---
+interface Props {
+  code: string;
+  label?: string;
+}
+
+const { code, label } = Astro.props;
+---
+
+<figure class="code-snippet">
+  {label && <figcaption class="zui-color-faint zui-text--1">{label}</figcaption>}
+  <div class="snippet-body">
+    <pre class="zui-pre"><code>{code}</code></pre>
+    <button
+      type="button"
+      class="zui-button zui-button-variant-ghost zui-button-size-sm zui-button-icon copy-button"
+      aria-label="Copy code"
+      title="Copy code"
+    >
+      <i class="ph ph-copy" aria-hidden="true"></i>
+    </button>
+  </div>
+</figure>
+
+<style>
+  .code-snippet {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+  }
+
+  .snippet-body {
+    position: relative;
+  }
+
+  .zui-pre {
+    overflow-x: auto;
+    padding: var(--space-xs) var(--space-sm);
+    /* keep code clear of the floating copy button */
+    padding-inline-end: var(--space-2xl);
+  }
+
+  .copy-button {
+    position: absolute;
+    inset-block-start: var(--space-2xs);
+    inset-inline-end: var(--space-2xs);
+  }
+</style>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>(
+    ".copy-button",
+  )) {
+    const icon = button.querySelector("i");
+    let timer: ReturnType<typeof setTimeout>;
+    button.addEventListener("click", async () => {
+      const code = button
+        .closest(".snippet-body")
+        ?.querySelector("code")?.textContent;
+      if (!code) return;
+      await navigator.clipboard.writeText(code);
+      icon?.classList.replace("ph-copy", "ph-check");
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        icon?.classList.replace("ph-check", "ph-copy");
+      }, 1500);
+    });
+  }
+</script>

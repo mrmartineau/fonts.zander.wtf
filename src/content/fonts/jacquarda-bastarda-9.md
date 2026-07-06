@@ -8,6 +8,7 @@ designer: "Sarah Cadigan-Fried"
 licence: "OFL"
 website: "https://github.com/scfried/soft-type-jacquarda-bastarda"
 googleFonts: "Jacquarda Bastarda 9"
+fontsource: "@fontsource/jacquarda-bastarda-9"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Jacquarda+Bastarda+9"

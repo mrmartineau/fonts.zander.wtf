@@ -11,6 +11,7 @@ foundry: "Florian Karsten Typefaces"
 licence: "OFL"
 website: "https://fonts.floriankarsten.com/space-grotesk"
 googleFonts: "Space Grotesk"
+fontsource: "@fontsource-variable/space-grotesk"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Space+Grotesk"

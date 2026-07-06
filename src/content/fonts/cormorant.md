@@ -11,6 +11,7 @@ foundry: "Catharsis Fonts"
 licence: "OFL"
 website: "https://github.com/CatharsisFonts/Cormorant"
 googleFonts: "Cormorant"
+fontsource: "@fontsource-variable/cormorant"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Cormorant"

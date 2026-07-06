@@ -8,6 +8,7 @@ designer: "Sebastian Kosch"
 licence: "OFL"
 website: "https://github.com/skosch/Crimson"
 googleFonts: "Crimson Text"
+fontsource: "@fontsource/crimson-text"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Crimson+Text"

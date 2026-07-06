@@ -12,6 +12,7 @@ foundry: "Florian Karsten Typefaces"
 licence: "OFL"
 website: "https://github.com/floriankarsten/montagu-slab"
 googleFonts: "Montagu Slab"
+fontsource: "@fontsource-variable/montagu-slab"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Montagu+Slab"

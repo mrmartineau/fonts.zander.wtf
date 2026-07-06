@@ -12,6 +12,7 @@ foundry: "Production Type"
 licence: "OFL"
 website: "https://productiontype.com/font/newsreader"
 googleFonts: "Newsreader"
+fontsource: "@fontsource-variable/newsreader"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Newsreader"

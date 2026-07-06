@@ -9,6 +9,7 @@ foundry: "UNCUT.wtf"
 licence: "OFL"
 previewFont: "/fonts/uncut-sans/UncutSans-Variable.woff2"
 website: "https://uncut.wtf/sans-serif/uncut-sans/"
+fontsource: "@fontsource/uncut-sans"
 links:
   - label: "uncut.wtf"
     url: "https://uncut.wtf/sans-serif/uncut-sans/"

@@ -9,6 +9,7 @@ foundry: "Colophon Foundry"
 licence: "OFL"
 website: "https://fonts.google.com/specimen/Space+Mono"
 googleFonts: "Space Mono"
+fontsource: "@fontsource/space-mono"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Space+Mono"

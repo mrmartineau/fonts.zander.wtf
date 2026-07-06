@@ -14,6 +14,7 @@ foundry: "Undercase Type"
 licence: "OFL"
 website: "https://fraunces.undercase.xyz/"
 googleFonts: "Fraunces"
+fontsource: "@fontsource-variable/fraunces"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Fraunces"

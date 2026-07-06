@@ -11,6 +11,7 @@ designer: "Niteesh Yadav"
 licence: "OFL"
 website: "https://github.com/niteeshy/ar-one-sans"
 googleFonts: "AR One Sans"
+fontsource: "@fontsource-variable/ar-one-sans"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/AR+One+Sans"

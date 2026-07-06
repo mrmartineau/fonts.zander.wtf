@@ -9,6 +9,7 @@ foundry: "Instrument"
 licence: "OFL"
 website: "https://github.com/Instrument/instrument-serif"
 googleFonts: "Instrument Serif"
+fontsource: "@fontsource/instrument-serif"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Instrument+Serif"

@@ -12,6 +12,7 @@ foundry: "Degarism Studio (for GitHub)"
 licence: "OFL"
 website: "https://github.com/github/hubot-sans"
 googleFonts: "Hubot Sans"
+fontsource: "@fontsource-variable/hubot-sans"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Hubot+Sans"

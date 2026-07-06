@@ -11,6 +11,7 @@ foundry: "Cyreal"
 licence: "OFL"
 website: "https://www.cyreal.org/"
 googleFonts: "Nunito"
+fontsource: "@fontsource-variable/nunito"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Nunito"

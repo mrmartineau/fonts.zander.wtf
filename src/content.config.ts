@@ -18,6 +18,9 @@ const fonts = defineCollection({
     // Full css2 spec (all weights/axes) — used by detail pages only, so the
     // homepage's combined request stays regular-400-only
     googleFontsSpec: z.string().optional(),
+    // Fontsource npm package name (e.g. "@fontsource-variable/geist"),
+    // set only when the package exists on npm
+    fontsource: z.string().optional(),
     weights: z.array(z.number()).default([]),
     axesRanges: z
       .array(

@@ -12,6 +12,7 @@ designer: "Rasmus Andersson"
 licence: "OFL"
 website: "https://rsms.me/inter/"
 googleFonts: "Inter"
+fontsource: "@fontsource-variable/inter"
 # Google's pipeline strips OpenType features — detail page loads the full
 # InterVariable build from rsms.me instead (homepage still uses Google 400)
 previewFont: "https://rsms.me/inter/font-files/InterVariable.woff2?v=4.1"

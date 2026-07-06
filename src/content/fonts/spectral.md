@@ -9,6 +9,7 @@ foundry: "Production Type"
 licence: "OFL"
 website: "https://productiontype.com/font/spectral"
 googleFonts: "Spectral"
+fontsource: "@fontsource/spectral"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Spectral"

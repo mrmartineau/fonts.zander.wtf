@@ -12,6 +12,7 @@ foundry: "Vercel"
 licence: "OFL"
 website: "https://vercel.com/font"
 googleFonts: "Geist Mono"
+fontsource: "@fontsource-variable/geist-mono"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Geist+Mono"

@@ -12,6 +12,7 @@ foundry: "Martian Fonts"
 licence: "OFL"
 website: "https://github.com/evilmartians/mono"
 googleFonts: "Martian Mono"
+fontsource: "@fontsource-variable/martian-mono"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Martian+Mono"

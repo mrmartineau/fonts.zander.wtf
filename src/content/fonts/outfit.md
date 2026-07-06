@@ -10,6 +10,7 @@ designer: "Rodrigo Fuenzalida"
 licence: "OFL"
 website: "https://fonts.google.com/specimen/Outfit"
 googleFonts: "Outfit"
+fontsource: "@fontsource-variable/outfit"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Outfit"

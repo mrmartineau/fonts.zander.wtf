@@ -4,6 +4,7 @@ import Badge from "@mrmartineau/zui/astro/Badge.astro";
 import Button from "@mrmartineau/zui/astro/Button.astro";
 import Card from "@mrmartineau/zui/astro/Card.astro";
 import CardBody from "@mrmartineau/zui/astro/CardBody.astro";
+import InstallOptions from "../../components/InstallOptions.astro";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -233,6 +234,8 @@ const hasDock = Boolean(
         </Card>
       )
     }
+
+    <InstallOptions font={font} />
 
     <section class="details">
       <h2>Details</h2>

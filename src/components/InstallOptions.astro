@@ -1,0 +1,171 @@
+---
+import type { CollectionEntry } from "astro:content";
+import CodeSnippet from "./CodeSnippet.astro";
+
+interface Props {
+  font: CollectionEntry<"fonts">;
+}
+
+const { font } = Astro.props;
+const data = font.data;
+
+// googleFonts may carry a css2 axis spec after a colon — strip it for names
+const family = data.googleFonts?.split(":")[0] ?? data.name;
+const generic =
+  data.category === "mono"
+    ? "monospace"
+    : data.category === "serif"
+      ? "serif"
+      : "sans-serif";
+
+// --- Google Fonts: <head> embed (full weights/axes spec) + example CSS ---
+const googleSpec = data.googleFontsSpec ?? data.googleFonts;
+const googleEmbed = googleSpec
+  ? [
+      '<link rel="preconnect" href="https://fonts.googleapis.com">',
+      '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
+      `<link href="https://fonts.googleapis.com/css2?family=${googleSpec.replaceAll(" ", "+")}&display=swap" rel="stylesheet">`,
+    ].join("\n")
+  : undefined;
+
+const wght = data.axesRanges.find((axis) => axis.tag === "wght");
+const weightComment =
+  data.variable && wght
+    ? `use a value from ${wght.min} to ${wght.max}`
+    : data.weights.length > 1
+      ? `one of ${data.weights.join(", ")}`
+      : undefined;
+const googleCss = [
+  ...(weightComment ? [`/* <weight>: ${weightComment} */`, ""] : []),
+  `.${font.id} {`,
+  `  font-family: "${family}", ${generic};`,
+  ...(data.axes.includes("opsz") ? ["  font-optical-sizing: auto;"] : []),
+  `  font-weight: ${weightComment ? "<weight>" : (data.weights[0] ?? 400)};`,
+  "}",
+].join("\n");
+
+// --- Fontsource: npm package (variable build preferred where published) ---
+const fontsource = data.fontsource;
+const fontsourceVariable = fontsource?.startsWith("@fontsource-variable/");
+const fontsourceComment =
+  fontsourceVariable && wght
+    ? `// Supports weights ${wght.min}-${wght.max}`
+    : data.weights.length > 1
+      ? `// Loads weight 400 — other weights: "${fontsource}/<weight>.css"`
+      : `// Loads weight ${data.weights[0] ?? 400}`;
+const fontsourceImport = fontsource
+  ? `${fontsourceComment}\nimport "${fontsource}";`
+  : undefined;
+const fontsourceCss = fontsource
+  ? ["body {", `  font-family: "${family}${fontsourceVariable ? " Variable" : ""}", ${generic};`, "}"].join(
+      "\n",
+    )
+  : undefined;
+
+// --- Self-host: point at the source download (GitHub where available) ---
+const download =
+  data.links.find((link) => link.url.includes("github.com")) ??
+  // a Google Fonts specimen page is not a self-host download source
+  data.links.find((link) => !link.url.includes("fonts.google.com"));
+const downloadUrl = download?.url ?? data.website;
+const downloadIsGitHub = downloadUrl.includes("github.com");
+const fontFaceCss = [
+  "@font-face {",
+  `  font-family: "${family}";`,
+  `  src: url("/fonts/${font.id}.woff2") format("woff2");`,
+  "  font-display: swap;",
+  "}",
+].join("\n");
+---
+
+<section class="install flow" aria-label="Install">
+  <h2>Install</h2>
+
+  {
+    googleEmbed && (
+      <div class="install-method flow">
+        <h3>
+          <i class="ph ph-google-logo" aria-hidden="true" /> Google Fonts
+        </h3>
+        <CodeSnippet label="Embed in the <head> of your HTML" code={googleEmbed} />
+        <CodeSnippet label={`Use ${family} in CSS`} code={googleCss} />
+      </div>
+    )
+  }
+
+  {
+    fontsource && fontsourceImport && fontsourceCss && (
+      <div class="install-method flow">
+        <h3>
+          <i class="ph ph-package" aria-hidden="true" /> Fontsource
+        </h3>
+        <CodeSnippet label="Install from npm" code={`npm install ${fontsource}`} />
+        <CodeSnippet label="Import once in your app entry" code={fontsourceImport} />
+        <CodeSnippet label="Use in CSS" code={fontsourceCss} />
+      </div>
+    )
+  }
+
+  <div class="install-method flow">
+    <h3>
+      <i class="ph ph-hard-drives" aria-hidden="true" /> Self-host
+    </h3>
+    {
+      (googleEmbed || fontsource) && (
+        <p class="feature-note zui-text--1">
+          <i class="ph ph-warning-circle" aria-hidden="true" /> Google Fonts and
+          Fontsource serve stripped builds — most OpenType features
+          {data.features.length > 0 &&
+            ` (including the ${data.features
+              .map((feature) => feature.label.toLowerCase())
+              .join(", ")} toggles on this page)`}{" "}
+          are removed. Self-hosting the original files is the only way to get
+          the full feature set.
+        </p>
+      )
+    }
+    <p class="zui-color-muted">
+      Download the font files from{" "}
+      <a href={downloadUrl} rel="noopener">
+        {downloadIsGitHub ? "GitHub" : (download?.label ?? "the website")}
+      </a>{" "}
+      and serve them yourself:
+    </p>
+    <CodeSnippet label="Declare with @font-face" code={fontFaceCss} />
+  </div>
+</section>
+
+<style>
+  /* Match the h2 treatment of the specimen/details sections */
+  .install h2 {
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.5;
+    margin-block: var(--space-lg) var(--space-xs);
+  }
+
+  .install-method {
+    --flow-space: var(--space-xs);
+    max-width: 48rem;
+  }
+
+  .install-method + .install-method {
+    margin-block-start: var(--space-lg);
+  }
+
+  .install-method h3 {
+    font-size: var(--step-0);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+  }
+
+  .feature-note {
+    color: var(--color-text);
+    opacity: 0.7;
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+</style>

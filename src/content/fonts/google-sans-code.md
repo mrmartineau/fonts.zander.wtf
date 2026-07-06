@@ -11,6 +11,7 @@ foundry: "Google / Universal Thirst"
 licence: "OFL"
 website: "https://fonts.google.com/specimen/Google+Sans+Code"
 googleFonts: "Google Sans Code"
+fontsource: "@fontsource-variable/google-sans-code"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Google+Sans+Code"

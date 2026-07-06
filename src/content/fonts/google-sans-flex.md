@@ -16,6 +16,7 @@ foundry: "Google"
 licence: "OFL"
 website: "https://fonts.google.com/specimen/Google+Sans+Flex"
 googleFonts: "Google Sans Flex"
+fontsource: "@fontsource-variable/google-sans-flex"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/Google+Sans+Flex"

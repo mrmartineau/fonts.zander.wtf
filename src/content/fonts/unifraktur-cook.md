@@ -9,6 +9,7 @@ foundry: "UniFraktur project"
 licence: "OFL"
 website: "https://unifraktur.sourceforge.net/cook.html"
 googleFonts: "UnifrakturCook:wght@700"
+fontsource: "@fontsource/unifrakturcook"
 links:
   - label: "Google Fonts"
     url: "https://fonts.google.com/specimen/UnifrakturCook"
