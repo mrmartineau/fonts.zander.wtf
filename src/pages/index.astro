@@ -176,7 +176,8 @@ const previewStyle = (font: (typeof fonts)[number]) =>
     font-size: clamp(2.5rem, 14vw, 7rem);
     line-height: 1.05;
     letter-spacing: -0.02em;
-    font-family: "Heal the Web Preview", system-ui, sans-serif;
+    font-family: var(--font-display);
+    font-weight: 400;
   }
 
   .site-header p {
@@ -242,8 +243,10 @@ const previewStyle = (font: (typeof fonts)[number]) =>
 
   .category-section h2 {
     font-size: var(--step-2);
-    letter-spacing: -0.01em;
     margin-block-end: var(--space-sm);
+    font-family: var(--font-display);
+    text-align: center;
+    font-weight: 400;
   }
 
   .font-list {

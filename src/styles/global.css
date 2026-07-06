@@ -12,6 +12,7 @@
   --color-background: light-dark(var(--color-mist-50), var(--color-mist-950));
   --color-surface: light-dark(var(--color-mist-100), var(--color-mist-900));
   --radius-scale: 1.25;
+  --font-display: "Heal the Web Preview", var(--font-body);
 }
 
 body {
