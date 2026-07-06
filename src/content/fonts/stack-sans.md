@@ -12,4 +12,6 @@ website: "https://github.com/DylanYoungKoto/Stack-Sans"
 links:
   - label: "GitHub"
     url: "https://github.com/DylanYoungKoto/Stack-Sans"
+features:
+  - { tag: "ss01", label: "Stack Notch Stylistic Set", default: true }
 ---

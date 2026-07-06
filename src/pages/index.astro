@@ -44,6 +44,22 @@ const localFontFaces = fonts
 const previewFamily = (font: (typeof fonts)[number]) =>
   font.data.googleFonts?.split(":")[0] ??
   (font.data.previewFont ? `${font.data.name} Preview` : undefined);
+
+// features marked `default: true` should render active on the homepage preview too
+const defaultFeatureSettings = (font: (typeof fonts)[number]) => {
+  const defaults = font.data.features.filter((feature) => feature.default);
+  return defaults.length
+    ? defaults.map((feature) => `"${feature.tag}" 1`).join(", ")
+    : undefined;
+};
+
+const previewStyle = (font: (typeof fonts)[number]) =>
+  [
+    previewFamily(font) && `font-family: '${previewFamily(font)}'`,
+    defaultFeatureSettings(font) && `font-feature-settings: ${defaultFeatureSettings(font)}`,
+  ]
+    .filter(Boolean)
+    .join("; ") || undefined;
 ---
 
 <Layout description="A curated showcase of free, high-quality typefaces by Zander Martineau">
@@ -104,10 +120,7 @@ const previewFamily = (font: (typeof fonts)[number]) =>
                   spellcheck="false"
                   data-preview
                   data-default={font.data.name}
-                  style={
-                    previewFamily(font) &&
-                    `font-family: '${previewFamily(font)}'`
-                  }
+                  style={previewStyle(font)}
                 >
                   {font.data.name}
                 </p>

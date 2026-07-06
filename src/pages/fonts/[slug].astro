@@ -353,7 +353,7 @@ const hasDock = Boolean(
                 type="button"
                 class="zui-button zui-button-variant-subtle zui-button-size-sm zui-button-shape-soft"
                 data-feature={feature.tag}
-                aria-pressed="false"
+                aria-pressed={feature.default ? "true" : "false"}
                 title={feature.tag}
               >
                 {feature.label}
@@ -570,8 +570,8 @@ const hasDock = Boolean(
   }
 
   .control-dock .zui-button[aria-pressed="true"] {
-    background-color: var(--color-text);
-    color: var(--color-background);
+    --zui-btn-fg: var(--color-background);
+    --zui-btn-hover-bg: var(--color-text);
   }
 
   #reset-specimen {
@@ -717,5 +717,6 @@ const hasDock = Boolean(
         applyFeatures();
       });
     }
+    applyFeatures();
   }
 </script>

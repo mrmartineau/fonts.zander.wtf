@@ -30,7 +30,9 @@ const fonts = defineCollection({
       )
       .default([]),
     // OpenType features the detail page exposes as on/off toggles
-    features: z.array(z.object({ tag: z.string(), label: z.string() })).default([]),
+    features: z
+      .array(z.object({ tag: z.string(), label: z.string(), default: z.boolean().default(false) }))
+      .default([]),
     previewFont: z.string().optional(),
     links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
   }),
