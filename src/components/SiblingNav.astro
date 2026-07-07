@@ -1,0 +1,90 @@
+---
+interface FontLink {
+  id: string;
+  name: string;
+}
+
+interface Props {
+  prev?: FontLink;
+  next?: FontLink;
+  category: string;
+  /** Top border + spacing for the end-of-page placement */
+  divider?: boolean;
+}
+
+const { prev, next, category, divider = false } = Astro.props;
+---
+
+{
+  (prev || next) && (
+    <nav class:list={["sibling-nav", { divider }]} aria-label={`More ${category} fonts`}>
+      {prev ? (
+        <a class="zui-button zui-button-variant-outline nav-prev zui-button-shape-soft" href={`/fonts/${prev.id}/`}>
+          <i class="ph ph-arrow-left" aria-hidden="true" />
+          {prev.name}
+        </a>
+      ) : (
+        <span />
+      )}
+      <a
+        class="zui-button zui-button-variant-ghost zui-button-shape-soft"
+        href={`/#${category}`}
+      >
+        <i class="ph ph-arrow-up" aria-hidden="true" />
+        All {category}
+      </a>
+      {next ? (
+        <a class="zui-button zui-button-variant-outline zui-button-shape-soft nav-next" href={`/fonts/${next.id}/`}>
+          {next.name}
+          <i class="ph ph-arrow-right" aria-hidden="true" />
+        </a>
+      ) : (
+        <span />
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .sibling-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    padding-block-start: var(--space-xs);
+    flex-wrap: wrap;
+    padding-inline: var(--space-sm);
+  }
+
+  .sibling-nav.divider {
+    border-block-start: 1px var(--border-style) var(--color-border);
+    padding-block-start: var(--space-md);
+    margin-block: var(--space-md);
+  }
+</style>
+
+<script>
+  // Left/right arrow keys follow the prev/next links. Astro dedupes this
+  // script, so it runs once however many times the component is rendered.
+  const keySelectors: Record<string, string> = {
+    ArrowLeft: ".nav-prev",
+    ArrowRight: ".nav-next",
+  };
+
+  document.addEventListener("keyup", (event) => {
+    const selector = keySelectors[event.key];
+    if (!selector) return;
+    // Ignore keys pressed while typing or adjusting a slider
+    const target = event.target;
+    if (
+      target instanceof HTMLElement &&
+      (target.matches("input, textarea, select") || target.isContentEditable)
+    ) {
+      return;
+    }
+    const href = document
+      .querySelector<HTMLAnchorElement>(selector)
+      ?.getAttribute("href");
+    if (href) window.location.href = href;
+  });
+</script>
