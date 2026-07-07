@@ -125,11 +125,35 @@ const hasDock = Boolean(
         <i class="ph ph-arrow-left"></i>
         All fonts
       </a>
+
+      <div class="specimen-controls">
+        <div class="size-control">
+          <label class="zui-color-faint zui-text--1" for="specimen-size">
+            <i class="ph ph-text-aa" /> Size
+          </label>
+          <input
+            type="range"
+            id="specimen-size"
+            min="16"
+            max="240"
+            step="1"
+            value="120"
+          />
+          <output
+            class="zui-color-faint zui-text--1"
+            for="specimen-size"
+            id="specimen-size-value">120px</output>
+        </div>
+      </div>
     </nav>
 
     {
       previewFamily && (
         <section class="preview-hero" aria-label="Editable preview">
+          <p class="zui-color-faint zui-text--1 specimen-hint">
+            <i class="ph ph-cursor-text" /> Click below and type to preview
+            your own text
+          </p>
           <label class="sr-only" for="specimen-input">
             Try {data.name} with your own text
           </label>
@@ -141,29 +165,6 @@ const hasDock = Boolean(
             autocomplete="off"
             placeholder={pangram}
           >{data.name}</textarea>
-          <div class="specimen-controls">
-            <p class="zui-color-faint zui-text--1 specimen-hint">
-              <i class="ph ph-cursor-text" /> Click above and type to preview
-              your own text
-            </p>
-            <div class="size-control">
-              <label class="zui-color-faint zui-text--1" for="specimen-size">
-                <i class="ph ph-text-aa" /> Size
-              </label>
-              <input
-                type="range"
-                id="specimen-size"
-                min="16"
-                max="240"
-                step="1"
-                value="120"
-              />
-              <output
-                class="zui-color-faint zui-text--1"
-                for="specimen-size"
-                id="specimen-size-value">120px</output>
-            </div>
-          </div>
         </section>
       )
     }
@@ -385,6 +386,14 @@ const hasDock = Boolean(
     padding-block: var(--space-md) var(--space-2xl);
   }
 
+  .back-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+  }
+
   .font-header {
     display: flex;
     flex-direction: column;
@@ -432,6 +441,10 @@ const hasDock = Boolean(
     font-feature-settings: var(--specimen-features, normal);
   }
 
+  .specimen-hint {
+    text-align: center;
+  }
+
   /* Keep the dock clear of the page content */
   .font-page.has-dock {
     padding-block-end: calc(var(--space-2xl) + 9rem);
@@ -440,6 +453,7 @@ const hasDock = Boolean(
   .preview-hero {
     padding-block: var(--space-xl);
     border-block-end: 1px var(--border-style) var(--color-border);
+    margin: 0;
   }
 
   /* Invisible textarea — reads as editable display text, not a form control */
@@ -471,7 +485,6 @@ const hasDock = Boolean(
     align-items: center;
     justify-content: center;
     gap: var(--space-xs) var(--space-lg);
-    margin-block-start: var(--space-md);
   }
 
   .size-control {

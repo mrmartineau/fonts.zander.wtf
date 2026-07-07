@@ -8,7 +8,7 @@ designer: "Sylvester Tan"
 foundry: "Death of Typography"
 licence: "OFL"
 previewFont: "/fonts/getai-grotesk-display/GetaiGroteskDisplay-Black.woff2"
-website: "https://sylvestertan.com/GETAI-GROTESK"
+website: "https://deathoftypography.com/getai-grotesk-display/"
 links:
   - label: "uncut.wtf"
     url: "https://uncut.wtf/display/getai-grotesk-display/"

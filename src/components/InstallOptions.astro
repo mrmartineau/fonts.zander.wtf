@@ -78,12 +78,12 @@ const fontFaceCss = [
 ].join("\n");
 ---
 
-<section class="install flow" aria-label="Install">
+<section class="install" aria-label="Install">
   <h2>Install</h2>
 
   {
     googleEmbed && (
-      <div class="install-method flow">
+      <div class="install-method">
         <h3>
           <i class="ph ph-google-logo" aria-hidden="true" /> Google Fonts
         </h3>
@@ -95,7 +95,7 @@ const fontFaceCss = [
 
   {
     fontsource && fontsourceImport && fontsourceCss && (
-      <div class="install-method flow">
+      <div class="install-method">
         <h3>
           <i class="ph ph-package" aria-hidden="true" /> Fontsource
         </h3>
@@ -106,7 +106,7 @@ const fontFaceCss = [
     )
   }
 
-  <div class="install-method flow">
+  <div class="install-method">
     <h3>
       <i class="ph ph-hard-drives" aria-hidden="true" /> Self-host
     </h3>
@@ -147,8 +147,10 @@ const fontFaceCss = [
   }
 
   .install-method {
-    --flow-space: var(--space-xs);
     max-width: 48rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
   }
 
   .install-method + .install-method {
