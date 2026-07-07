@@ -1,16 +1,16 @@
 ---
 name: font-picker
-description: Pick great free fonts for websites and apps from fonts.zander.wtf's hand-curated catalog of 62 typefaces. Use this whenever the user is choosing typography — a font for a new site, landing page, UI, blog, portfolio, docs site, or app; a code/terminal font; a pixel or retro font; a font pairing (heading + body); or asks for "a nice font", "something like Inter/Helvetica", "an interesting typeface", or alternatives to a commercial font. Also use it when scaffolding a new site's CSS and typography hasn't been decided yet.
+description: Pick great free fonts for websites and apps from fonts.zander.wtf's hand-curated catalog of 70 typefaces. Use this whenever the user is choosing typography — a font for a new site, landing page, UI, blog, portfolio, docs site, or app; a code/terminal font; a pixel or retro font; a font pairing (heading + body); or asks for "a nice font", "something like Inter/Helvetica", "an interesting typeface", or alternatives to a commercial font. Also use it when scaffolding a new site's CSS and typography hasn't been decided yet.
 ---
 
 # Font Picker
 
-Recommend fonts from a curated, opinionated catalog of 62 free typefaces (fonts.zander.wtf) instead of defaulting to the same handful of overused Google Fonts. Every font in the catalog is free for commercial use, personally vetted, and has a live specimen page the user can look at.
+Recommend fonts from a curated, opinionated catalog of 70 free typefaces (fonts.zander.wtf) instead of defaulting to the same handful of overused Google Fonts. Every font in the catalog is free for commercial use, personally vetted, and has a live specimen page the user can look at — with interactive weight/axis sliders and OpenType feature toggles so they can try the font before committing.
 
 ## Data sources
 
 1. **`references/catalog.md`** — the bundled catalog, grouped by category (sans-serif, serif, mono, pixel, display). Read the relevant category sections before recommending anything.
-2. **`https://fonts.zander.wtf/fonts.json`** — live JSON with the same data plus any fonts added since this skill was packaged. Fetch it when network is available; fall back to the bundled catalog when it isn't.
+2. **`https://fonts.zander.wtf/fonts.json`** — live JSON with the same data plus any fonts added since this skill was packaged, including fields the catalog summarises: `weights`, `axesRanges` (min/max/default per axis), `features` (OpenType toggles), `fontsource` (npm package), and `googleFontsSpec` (full css2 spec). Fetch it when network is available; fall back to the bundled catalog when it isn't.
 3. **Specimen pages** — every font has one at `https://fonts.zander.wtf/fonts/<slug>/`. Always include specimen links in recommendations so the user can _see_ the font before committing.
 
 ## Workflow
@@ -27,38 +27,74 @@ Recommend fonts from a curated, opinionated catalog of 62 free typefaces (fonts.
    - Contrast in category, harmony in mood: display or serif headlines + workhorse sans body; or a single variable font across roles using weight/optical-size axes.
    - A characterful font gets one job only. Two loud fonts fight.
    - When in doubt, one variable sans (e.g. one with `wght` + `opsz`) covers headings and body cleanly.
-5. **Implement it** if the user is building: loading code, fallback stack, and licence note. See below.
+5. **Implement it** if the user is building: pick an install method (Google Fonts embed, Fontsource npm package, or self-host), give loading code, fallback stack, and licence note. See below.
 
 ## Implementation
 
-Check the catalog entry's metadata:
+There are three ways to install a font — pick by the project's setup, then check the catalog entry's metadata for what's available:
 
-- **`Google Fonts: "Name"`** — load from Google Fonts (or better: download and self-host for privacy/performance):
-  ```html
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Family+Name:wght@400..700&display=swap"
-    rel="stylesheet"
-  />
-  ```
-  For variable fonts request an axis range (`wght@400..700`), not comma-separated static weights.
-- **`self-host only`** — not on Google Fonts. Download from the linked website/source, then:
-  ```css
-  @font-face {
-    font-family: "Family Name";
-    src: url("/fonts/family-name.woff2") format("woff2");
-    font-weight: 100 900; /* range for variable fonts */
-    font-display: swap;
-  }
-  ```
+1. **Google Fonts** (entry has `Google Fonts: "Name"`) — zero-build, good for plain HTML/static pages. Use the entry's `css2 spec` verbatim (it encodes every weight and axis range, with spaces as `+` in the URL); trim it to the weights actually needed:
+
+   ```html
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+     href="https://fonts.googleapis.com/css2?family=Family+Name:wght@400..700&display=swap"
+     rel="stylesheet"
+   />
+   ```
+
+   For variable fonts request an axis range (`wght@400..700`), not comma-separated static weights.
+
+2. **Fontsource** (entry lists a `Fontsource` npm package) — npm package, the best default for any project with a bundler (Vite, Next, Astro…): self-hosted output, versioned, no third-party requests. Prefer this over the Google Fonts embed when there's a build step.
+
+   ```sh
+   npm install @fontsource-variable/family-name
+   ```
+
+   ```js
+   import "@fontsource-variable/family-name"; // once, in the app entry
+   ```
+
+   ```css
+   body {
+     font-family: "Family Name Variable", sans-serif;
+   }
+   ```
+
+   `@fontsource-variable/*` packages register the family as `"<Name> Variable"` and cover the full weight range. Static `@fontsource/*` packages load weight 400 by default — import extra weights as `"@fontsource/family-name/700.css"` and use the plain family name.
+
+3. **Self-host** (entries marked `self-host only`, or whenever OpenType features matter — see below). Download from the entry's linked website/source, then:
+
+   ```css
+   @font-face {
+     font-family: "Family Name";
+     src: url("/fonts/family-name.woff2") format("woff2");
+     font-weight: 100 900; /* range for variable fonts */
+     font-display: swap;
+   }
+   ```
 
 Always:
 
 - Give a real fallback stack, e.g. `font-family: "Inter", system-ui, sans-serif;` (or `ui-monospace, monospace` for mono).
 - Use `font-display: swap` (or `&display=swap`).
-- For variable fonts, mention the useful axes from the catalog entry — e.g. Fraunces' `SOFT`/`WONK`, optical sizing via `font-optical-sizing: auto`.
+- For variable fonts, mention the useful axes from the catalog entry — e.g. Fraunces' `SOFT`/`WONK`, optical sizing via `font-optical-sizing: auto`. Every axis's min/max/default is in the live JSON's `axesRanges`.
 - Note the licence (almost all are OFL; a few differ — the catalog flags them). If the entry lists a non-standard licence (CC BY, custom, freeware), tell the user to check terms for their use case.
+
+## OpenType features
+
+Some entries list **OpenType feature toggles** (e.g. Inter's slashed zero `zero`, tabular numbers `tnum`, stylistic sets `ss01`…) — the same toggles are interactive on the font's specimen page. Enable them in CSS with:
+
+```css
+font-feature-settings:
+  "zero" 1,
+  "ss01" 1;
+```
+
+Prefer the high-level properties where one exists (`font-variant-numeric: tabular-nums slashed-zero;`, `font-variant-ligatures`), since `font-feature-settings` is low-level and all-or-nothing per declaration.
+
+**Critical gotcha:** Google Fonts and Fontsource serve stripped builds — most OpenType features are removed from the woff2 (Inter arrives with little more than `pnum`/`tnum`; `zero`, `ss01`, `dlig`, `frac`, `case` are gone). If the design needs a font's features, self-host the original files from the foundry/source instead. When in doubt, verify what a file actually contains with fontTools (`pyftsubset`/`ttx`) before promising a feature works.
 
 ## Recommendation format
 
