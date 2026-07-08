@@ -1,10 +1,10 @@
 # Font catalog — fonts.zander.wtf
 
-70 hand-picked free fonts, grouped by category. Live data: https://fonts.zander.wtf/fonts.json — each font also has a specimen page for visual preview.
+71 hand-picked free fonts, grouped by category. Live data: https://fonts.zander.wtf/fonts.json — each font also has a specimen page for visual preview.
 
 Entry metadata: `css2 spec` is the exact Google Fonts css2 `family=` value covering every weight/axis range; `Fontsource` is the npm package name. OpenType feature toggles are stripped from Google Fonts and Fontsource builds — self-host the original files to use them.
 
-## sans-serif (25)
+## sans-serif (26)
 
 Workhorse and character sans faces. First stop for UI, product, and marketing body text.
 
@@ -169,6 +169,16 @@ Mozilla's brand headline face with a uniwidth design — spacing and kerning sta
 css2 spec: `Mozilla Headline:wdth,wght@75..125,200..700`
 
 Designed by Studio DRAMA (Mozilla). [Specimen](https://fonts.zander.wtf/fonts/mozilla-headline/) · [Website](https://github.com/mozilla/mozilla-headline-type)
+
+### Mozilla Text
+
+_variable (wght) · licence: OFL · Google Fonts: "Mozilla Text" · Fontsource: `@fontsource-variable/mozilla-text`_
+
+Mozilla's brand text face and companion to Mozilla Headline — a readable workhorse sans tuned for body copy and UI at small sizes.
+
+css2 spec: `Mozilla Text:wght@200..700`
+
+Designed by Studio DRAMA (Mozilla). [Specimen](https://fonts.zander.wtf/fonts/mozilla-text/) · [Website](https://github.com/mozilla/mozilla-text-type)
 
 ### Nunito
 

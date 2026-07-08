@@ -1,11 +1,11 @@
 ---
 name: font-picker
-description: Pick great free fonts for websites and apps from fonts.zander.wtf's hand-curated catalog of 70 typefaces. Use this whenever the user is choosing typography — a font for a new site, landing page, UI, blog, portfolio, docs site, or app; a code/terminal font; a pixel or retro font; a font pairing (heading + body); or asks for "a nice font", "something like Inter/Helvetica", "an interesting typeface", or alternatives to a commercial font. Also use it when scaffolding a new site's CSS and typography hasn't been decided yet.
+description: Pick great free fonts for websites and apps from fonts.zander.wtf's hand-curated catalog of 71 typefaces. Use this whenever the user is choosing typography — a font for a new site, landing page, UI, blog, portfolio, docs site, or app; a code/terminal font; a pixel or retro font; a font pairing (heading + body); or asks for "a nice font", "something like Inter/Helvetica", "an interesting typeface", or alternatives to a commercial font. Also use it when scaffolding a new site's CSS and typography hasn't been decided yet.
 ---
 
 # Font Picker
 
-Recommend fonts from a curated, opinionated catalog of 70 free typefaces (fonts.zander.wtf) instead of defaulting to the same handful of overused Google Fonts. Every font in the catalog is free for commercial use, personally vetted, and has a live specimen page the user can look at — with interactive weight/axis sliders and OpenType feature toggles so they can try the font before committing.
+Recommend fonts from a curated, opinionated catalog of 71 free typefaces (fonts.zander.wtf) instead of defaulting to the same handful of overused Google Fonts. Every font in the catalog is free for commercial use, personally vetted, and has a live specimen page the user can look at — with interactive weight/axis sliders and OpenType feature toggles so they can try the font before committing.
 
 ## Data sources
 
