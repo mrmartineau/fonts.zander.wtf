@@ -37,15 +37,29 @@ def font_entry(f):
         axes = ", ".join(f.get("axes", []))
         meta.append(f"variable ({axes})" if axes else "variable")
     else:
-        meta.append("static")
+        weights = f.get("weights", [])
+        meta.append(
+            f"static (weights {', '.join(map(str, weights))})" if len(weights) > 1 else "static"
+        )
     meta.append(f"licence: {f['licence']}")
     if f.get("googleFonts"):
-        meta.append(f"Google Fonts: \"{f['googleFonts']}\"")
+        # googleFonts may carry a css2 axis spec after a colon — strip it for the family name
+        meta.append(f"Google Fonts: \"{f['googleFonts'].split(':')[0]}\"")
     else:
         meta.append("self-host only")
+    if f.get("fontsource"):
+        meta.append(f"Fontsource: `{f['fontsource']}`")
     lines.append(f"*{' · '.join(meta)}*")
     lines.append("")
     lines.append(f["description"])
+    spec = f.get("googleFontsSpec") or f.get("googleFonts")
+    if spec:
+        lines.append("")
+        lines.append(f"css2 spec: `{spec}`")
+    if f.get("features"):
+        feats = ", ".join(f"{feat['label']} (`{feat['tag']}`)" for feat in f["features"])
+        lines.append("")
+        lines.append(f"OpenType feature toggles: {feats}.")
     designer = f.get("designer", "")
     foundry = f.get("foundry")
     credit = f"Designed by {designer}" + (f" ({foundry})" if foundry and foundry not in designer else "")
@@ -65,6 +79,11 @@ def main():
         "",
         f"{len(fonts)} hand-picked free fonts, grouped by category. "
         "Live data: https://fonts.zander.wtf/fonts.json — each font also has a specimen page for visual preview.",
+        "",
+        "Entry metadata: `css2 spec` is the exact Google Fonts css2 `family=` value covering "
+        "every weight/axis range; `Fontsource` is the npm package name. "
+        "OpenType feature toggles are stripped from Google Fonts and Fontsource builds — "
+        "self-host the original files to use them.",
         "",
     ]
     for cat in CATEGORY_ORDER:
