@@ -1,0 +1,162 @@
+---
+import Button from "@mrmartineau/zui/astro/Button.astro";
+import CodeSnippet from "../components/CodeSnippet.astro";
+import Layout from "../layouts/Layout.astro";
+
+const installCommand = "npx skills add mrmartineau/fonts.zander.wtf";
+---
+
+<Layout
+  title="Font Picker skill"
+  description="An agent skill that teaches Claude Code (and other AI coding agents) to pick great free fonts from this curated catalog."
+>
+  <main class="site-container flow skill-page">
+    <nav class="back-nav">
+      <a class="zui-button zui-button-variant-ghost zui-button-size-sm" href="/">
+        <i class="ph ph-arrow-left"></i>
+        All fonts
+      </a>
+    </nav>
+
+    <header class="skill-header">
+      <h1>Font Picker</h1>
+      <p class="zui-color-muted zui-text-1">
+        An agent skill that teaches AI coding agents — Claude Code, Cursor,
+        Codex and friends — to pick typefaces from this catalog instead of
+        reaching for the same handful of overused defaults.
+      </p>
+    </header>
+
+    <section class="skill-section" aria-label="Install">
+      <h2>Install</h2>
+      <p class="zui-color-muted">
+        Install it with the <a class="zui-link" href="https://skills.sh" rel="noopener">skills</a> CLI,
+        which sets it up for whichever agents you use:
+      </p>
+      <CodeSnippet code={installCommand} />
+      <p class="zui-color-muted">
+        Or install it manually: copy the
+        <code class="zui-code">skill/font-picker</code> directory from the
+        repository into your agent's skills folder — for Claude Code that's
+        <code class="zui-code">.claude/skills/</code> in a project or
+        <code class="zui-code">~/.claude/skills/</code> for all projects.
+      </p>
+      <div class="flex flex-wrap gap-xs">
+        <Button
+          variant="outline"
+          href="https://github.com/mrmartineau/fonts.zander.wtf/tree/main/skill/font-picker"
+          rel="noopener"
+        >
+          <i class="ph ph-github-logo"></i>
+          View the skill on GitHub
+        </Button>
+      </div>
+    </section>
+
+    <section class="skill-section" aria-label="What it does">
+      <h2>What it does</h2>
+      <p class="zui-color-muted">
+        Once installed, your agent uses this site's hand-curated catalog
+        whenever typography comes up — choosing a font for a new site, finding
+        a code font, or pairing a heading face with a body face. Every font is
+        free for commercial use and has a live specimen page here to preview
+        it. The skill knows how to:
+      </p>
+      <ul class="zui-color-muted skill-list">
+        <li>
+          Shortlist two or three fonts that fit the job — UI, long-form
+          reading, code, retro, display — with a specimen link for each so you
+          can see them before committing.
+        </li>
+        <li>
+          Suggest pairings: a characterful heading face with a workhorse body
+          face, or one variable font that covers both roles.
+        </li>
+        <li>
+          Write the loading code — a Google Fonts embed, a Fontsource npm
+          package, or self-hosted <code class="zui-code">@font-face</code>
+          rules — with sensible fallback stacks and
+          <code class="zui-code">font-display: swap</code>.
+        </li>
+        <li>
+          Handle the gotchas: Google Fonts and Fontsource serve stripped
+          builds, so when a design needs OpenType features (slashed zeroes,
+          stylistic sets, small caps) it recommends self-hosting the original
+          files.
+        </li>
+      </ul>
+      <p class="zui-color-muted">
+        The skill bundles a snapshot of the catalog and also reads the live
+        data from <a class="zui-link" href="/fonts.json">fonts.json</a>, so it
+        picks up fonts added after it was installed.
+      </p>
+    </section>
+
+    <section class="skill-section" aria-label="Try it">
+      <h2>Try asking your agent</h2>
+      <ul class="zui-color-muted skill-list">
+        <li>“Pick a font for my developer blog.”</li>
+        <li>“I want something like Inter, but with more character.”</li>
+        <li>“Suggest a heading and body pairing for a portfolio site.”</li>
+        <li>“Give me a pixel font for a retro game landing page.”</li>
+      </ul>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .skill-page {
+    padding-block-end: var(--space-2xl);
+  }
+
+  .back-nav {
+    padding-block-start: var(--space-sm);
+  }
+
+  .skill-header {
+    padding-block: var(--space-lg) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .skill-header h1 {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  .skill-header p,
+  .skill-section p {
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+
+  .skill-section {
+    max-width: 48rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  /* Match the h2 treatment of the detail-page install/details sections */
+  .skill-section h2 {
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.5;
+    margin-block-start: var(--space-lg);
+  }
+
+  .skill-list {
+    padding-inline-start: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+</style>
