@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Badge from "@mrmartineau/zui/astro/Badge.astro";
 import Card from "@mrmartineau/zui/astro/Card.astro";
+import CodeSnippet from "../components/CodeSnippet.astro";
 import Layout from "../layouts/Layout.astro";
 
 const fonts = await getCollection("fonts");
@@ -75,6 +76,13 @@ const previewStyle = (font: (typeof fonts)[number]) =>
       good selection of weights and/or is variable — unless it's a display
       face.
     </p>
+    <div class="skill-note">
+      <p class="zui-color-faint zui-text--1">
+        This catalog is also an <a class="zui-link" href="/skill/">agent skill</a> —
+        let Claude Code, Cursor & co pick fonts from it:
+      </p>
+      <CodeSnippet code="npx skills add mrmartineau/fonts.zander.wtf" />
+    </div>
   </header>
 
   <div class="wayfinder">
@@ -184,6 +192,23 @@ const previewStyle = (font: (typeof fonts)[number]) =>
     max-width: 46ch;
     text-wrap: pretty;
     margin-inline: auto;
+  }
+
+  .skill-note {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xs);
+    margin-block-start: var(--space-sm);
+  }
+
+  /* The copy button sits over the code — keep the snippet compact + centred */
+  .skill-note :global(.code-snippet) {
+    max-width: 100%;
+  }
+
+  .skill-note :global(.zui-pre) {
+    text-align: start;
   }
 
   .wayfinder {
